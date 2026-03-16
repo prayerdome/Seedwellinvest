@@ -1,0 +1,5156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seedwel Investment Limited - Premium Financial Platform</title>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging-compat.js"></script>
+  
+  <!-- Google Fonts - Premium Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Pro -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Swiper for Cards -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Leaflet for maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- GSAP for Premium Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  
+  <!-- Particles.js for Background Effects -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
+  <!-- Moment.js for Date Handling -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  
+  <!-- CountUp for Statistics -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.umd.js"></script>
+  
+  <!-- EmailJS for Contact Forms -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <!-- Stripe for Payments -->
+  <script src="https://js.stripe.com/v3/"></script>
+  
+  <!-- Axios for API Calls -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Premium Color Palette */
+      --primary: #0a2a66;
+      --primary-light: #1e3a7a;
+      --primary-dark: #051a3f;
+      --primary-gradient: linear-gradient(135deg, #0a2a66 0%, #1e3a7a 50%, #0a2a66 100%);
+      --secondary: #ffd700;
+      --secondary-light: #fff0b3;
+      --secondary-dark: #e6c200;
+      --secondary-gradient: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+      
+      /* Status Colors */
+      --success: #10b981;
+      --success-light: #d1fae5;
+      --danger: #ef4444;
+      --danger-light: #fee2e2;
+      --warning: #f59e0b;
+      --warning-light: #fed7aa;
+      --info: #3b82f6;
+      --info-light: #dbeafe;
+      
+      /* Neutral Colors */
+      --dark: #0f172a;
+      --dark-80: #1e293b;
+      --dark-60: #334155;
+      --dark-40: #475569;
+      --light: #f8fafc;
+      --light-80: #f1f5f9;
+      --light-60: #e2e8f0;
+      --light-40: #cbd5e1;
+      --white: #ffffff;
+      --gray: #64748b;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+      --shadow-2xl: 0 40px 80px -20px rgb(0 0 0 / 0.3);
+      --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+      --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.3);
+      --shadow-glow-lg: 0 0 40px rgba(255, 215, 0, 0.5);
+      
+      /* Transitions */
+      --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      
+      /* Border Radius */
+      --radius-sm: 0.375rem;
+      --radius: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-2xl: 2rem;
+      --radius-3xl: 3rem;
+      --radius-full: 9999px;
+      
+      /* Font Families */
+      --font-primary: 'Inter', sans-serif;
+      --font-secondary: 'Poppins', sans-serif;
+      --font-heading: 'Playfair Display', serif;
+    }
+
+    /* ===== GLOBAL STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== CUSTOM SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--light-80);
+      border-radius: var(--radius-full);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-light);
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    h4 {
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+    }
+
+    /* ===== PREMIUM HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    header.scrolled {
+      padding: 0.8rem 5%;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .logo {
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+      cursor: pointer;
+      transition: var(--transition);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 8px 12px rgba(255,215,0,0.3));
+    }
+
+    .logo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(20px);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .logo:hover .logo-glow {
+      opacity: 1;
+    }
+
+    /* ===== PREMIUM MENU ICON ===== */
+    .menu-icon {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: var(--light);
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .menu-icon:hover {
+      background: var(--secondary);
+      transform: rotate(90deg);
+    }
+
+    .menu-icon i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      color: var(--dark);
+      transition: var(--transition);
+    }
+
+    .menu-icon:hover i {
+      color: var(--primary);
+    }
+
+    /* ===== PREMIUM NAVIGATION ===== */
+    .nav-menu {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--secondary-gradient);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-menu a:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      transition: var(--transition);
+      z-index: -1;
+    }
+
+    .nav-menu a:hover::after {
+      width: 200%;
+      height: 200%;
+    }
+
+    .nav-menu a.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .nav-menu a.active::before {
+      transform: scaleX(1);
+    }
+
+    /* ===== PREMIUM BUTTONS ===== */
+    .btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition-bounce);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .btn-secondary {
+      background: var(--secondary-gradient);
+      color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--dark);
+    }
+
+    .btn-ghost:hover {
+      background: var(--light-80);
+      transform: translateY(-2px);
+    }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: var(--radius-full);
+    }
+
+    /* ===== PREMIUM USER MENU ===== */
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      position: relative;
+      padding: 0.4rem 1rem 0.4rem 0.5rem;
+      background: var(--light);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+      border: 2px solid transparent;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .user-menu:hover {
+      border-color: var(--secondary);
+      background: var(--white);
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+      transform: translateY(-2px);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--secondary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--primary);
+      font-size: 1.2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .user-menu:hover .user-avatar {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .user-menu span {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--dark);
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .user-menu i {
+      font-size: 0.8rem;
+      color: var(--gray);
+      transition: var(--transition);
+    }
+
+    .user-menu:hover i {
+      color: var(--secondary);
+      transform: rotate(180deg);
+    }
+
+    /* ===== PREMIUM DROPDOWN ===== */
+    .dropdown-menu {
+      position: absolute;
+      top: 120%;
+      right: 0;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-2xl);
+      min-width: 340px;
+      display: none;
+      z-index: 1000;
+      overflow: hidden;
+      animation: slideDown 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-header {
+      background: var(--primary-gradient);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dropdown-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .dropdown-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--secondary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--primary);
+      font-size: 1.8rem;
+      border: 3px solid rgba(255,255,255,0.3);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 1;
+    }
+
+    .dropdown-user-info {
+      position: relative;
+      z-index: 1;
+    }
+
+    .dropdown-user-info h4 {
+      color: var(--white);
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .dropdown-user-info p {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.85rem;
+    }
+
+    .dropdown-section {
+      padding: 0.75rem;
+    }
+
+    .dropdown-section a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      color: var(--dark);
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dropdown-section a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary-light), transparent);
+      transition: width 0.3s ease;
+      z-index: 0;
+    }
+
+    .dropdown-section a:hover::before {
+      width: 100%;
+    }
+
+    .menu-icon-wrapper {
+      width: 40px;
+      height: 40px;
+      background: var(--light);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.2rem;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dropdown-section a:hover .menu-icon-wrapper {
+      background: var(--secondary-gradient);
+      color: var(--primary);
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .menu-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--dark);
+    }
+
+    .menu-subtitle {
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    .menu-badge {
+      background: var(--secondary-gradient);
+      color: var(--primary);
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: bold;
+      min-width: 45px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--light-60), transparent);
+      margin: 0.5rem 0;
+    }
+
+    .logout-btn {
+      color: var(--danger) !important;
+    }
+
+    .logout-btn .menu-icon-wrapper {
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    .logout-btn:hover {
+      background: var(--danger-light) !important;
+    }
+
+    .logout-btn:hover .menu-icon-wrapper {
+      background: var(--danger) !important;
+      color: var(--white) !important;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* ===== PREMIUM THEME TOGGLE ===== */
+    .theme-toggle {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-bounce);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .theme-toggle:hover::before {
+      width: 100px;
+      height: 100px;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(180deg) scale(1.1);
+      background: var(--secondary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .theme-toggle i {
+      font-size: 1.2rem;
+      color: var(--dark);
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover i {
+      color: var(--primary);
+    }
+
+    /* ===== PREMIUM MAIN CONTENT ===== */
+    main {
+      margin-top: 80px;
+      min-height: calc(100vh - 80px);
+      position: relative;
+    }
+
+    /* ===== PREMIUM CONTAINER ===== */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 5%;
+    }
+
+    .container-fluid {
+      width: 100%;
+      padding: 2rem 5%;
+    }
+
+    /* ===== PREMIUM SECTION TITLE ===== */
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      font-family: var(--font-heading);
+    }
+
+    .section-title::before {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary-gradient);
+      border-radius: var(--radius-full);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 4px;
+      background: var(--primary-gradient);
+      border-radius: var(--radius-full);
+      opacity: 0.5;
+    }
+
+    .section-title.left {
+      text-align: left;
+    }
+
+    .section-title.left::before,
+    .section-title.left::after {
+      left: 0;
+      transform: translateX(0);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 1.2rem;
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== PREMIUM GRIDS ===== */
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .grid-5 {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .grid-6 {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== PREMIUM CARDS ===== */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition-bounce);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--secondary-gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: var(--shadow-2xl), var(--shadow-glow);
+    }
+
+    .card-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,215,0,0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .card:hover .card-glow {
+      opacity: 1;
+    }
+
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--light);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .card:hover .card-icon {
+      background: var(--secondary-gradient);
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .card-icon i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .card:hover .card-icon i {
+      color: var(--primary);
+      transform: scale(1.1);
+    }
+
+    /* ===== PREMIUM PLAN CARDS ===== */
+    .plan-card {
+      background: var(--white);
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition-bounce);
+      position: relative;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .plan-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: var(--shadow-2xl), var(--shadow-glow-lg);
+    }
+
+    .plan-card.popular {
+      transform: scale(1.05);
+      border: 2px solid var(--secondary);
+      box-shadow: var(--shadow-glow-lg);
+    }
+
+    .plan-card.popular:hover {
+      transform: scale(1.07) translateY(-15px);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--secondary-gradient);
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: bold;
+      font-size: 0.9rem;
+      z-index: 10;
+      box-shadow: var(--shadow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 15px rgba(255, 215, 0, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+      }
+    }
+
+    .plan-header {
+      background: var(--primary-gradient);
+      color: var(--white);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    .plan-header i {
+      font-size: 3.5rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+    }
+
+    .plan-header h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .plan-price {
+      font-size: 3rem;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+    }
+
+    .plan-price small {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .plan-body {
+      padding: 2.5rem 2rem;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .plan-features li {
+      padding: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px dashed var(--light-60);
+    }
+
+    .plan-features li:last-child {
+      border-bottom: none;
+    }
+
+    .plan-features i {
+      color: var(--success);
+      font-size: 1.2rem;
+    }
+
+    .plan-footer {
+      padding: 0 2rem 2.5rem;
+      text-align: center;
+    }
+
+    .plan-footer .btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+    }
+
+    /* ===== PREMIUM HERO SECTION ===== */
+    .hero-section {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      background: var(--primary-gradient);
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .hero-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text {
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-text h1 span {
+      color: var(--secondary);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-text h1 span::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 215, 0, 0.3);
+      z-index: -1;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .hero-image {
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-2xl);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image-shape {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 110%;
+      height: 110%;
+      background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+      z-index: 1;
+    }
+
+    /* ===== PREMIUM SEARCH SECTION ===== */
+    .search-section {
+      margin-top: -50px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-container {
+      background: var(--white);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-2xl);
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .search-item {
+      position: relative;
+    }
+
+    .search-item i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+      transition: var(--transition);
+    }
+
+    .search-item input,
+    .search-item select {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border: 2px solid var(--light-60);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+      background: var(--white);
+    }
+
+    .search-item input:focus,
+    .search-item select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .search-item input:focus + i,
+    .search-item select:focus + i {
+      color: var(--secondary);
+    }
+
+    .search-btn {
+      padding: 1rem;
+      background: var(--primary-gradient);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* ===== PREMIUM FEATURED SECTION ===== */
+    .featured-section {
+      padding: 4rem 0;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .featured-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition-bounce);
+      cursor: pointer;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-2xl);
+    }
+
+    .featured-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-slow);
+    }
+
+    .featured-card:hover .featured-image img {
+      transform: scale(1.1);
+    }
+
+    .featured-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .featured-card:hover .featured-overlay {
+      opacity: 1;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--secondary-gradient);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-weight: bold;
+      font-size: 0.9rem;
+      z-index: 2;
+    }
+
+    .featured-content {
+      padding: 1.5rem;
+    }
+
+    .featured-content h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .featured-content p {
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .featured-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--dark-60);
+      font-size: 0.9rem;
+    }
+
+    .featured-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--success);
+    }
+    
+    /* ===== PREMIUM STATISTICS SECTION ===== */
+    .stats-section {
+      background: var(--primary-gradient);
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-item {
+      color: var(--white);
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-heading);
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* ===== PREMIUM SERVICES SECTION ===== */
+    .services-section {
+      padding: 5rem 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition-bounce);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-light) 0%, transparent 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .service-card:hover::before {
+      opacity: 0.1;
+    }
+
+    .service-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: var(--shadow-2xl);
+    }
+
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--secondary-gradient);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .service-icon i {
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    .service-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .service-card p {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .service-link {
+      color: var(--secondary);
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .service-link:hover {
+      gap: 1rem;
+      color: var(--secondary-dark);
+    }
+
+    /* ===== PREMIUM TESTIMONIALS SECTION ===== */
+    .testimonials-section {
+      padding: 5rem 0;
+      background: var(--light-80);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonials-section::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 300px;
+      height: 300px;
+      background: var(--secondary-gradient);
+      border-radius: 50%;
+      opacity: 0.1;
+      filter: blur(50px);
+    }
+
+    .testimonials-section::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: var(--primary-gradient);
+      border-radius: 50%;
+      opacity: 0.1;
+      filter: blur(50px);
+    }
+
+    .testimonials-slider {
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      margin: 1rem;
+      transition: var(--transition);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-2xl);
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--secondary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .testimonial-info h4 {
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .testimonial-info p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .testimonial-rating {
+      color: var(--secondary);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-text {
+      color: var(--dark-60);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-date {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* ===== PREMIUM CTA SECTION ===== */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      padding: 5rem 2rem;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 0L60 30L30 60L0 30L30 0Z" fill="rgba(255,255,255,0.03)"/></svg>');
+      opacity: 0.1;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-content h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* ===== PREMIUM FOOTER ===== */
+    footer {
+      background: var(--dark);
+      color: var(--white);
+      padding: 5rem 5% 2rem;
+      position: relative;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto 3rem;
+    }
+
+    .footer-col h3 {
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--secondary-gradient);
+    }
+
+    .footer-col p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li i {
+      color: var(--secondary);
+      width: 25px;
+    }
+
+    .footer-col a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .footer-col a:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .social-links a:hover i {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+
+    /* ===== PREMIUM MODALS ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: var(--radius-2xl);
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--shadow-2xl);
+      animation: slideUpModal 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes slideUpModal {
+      0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: var(--danger);
+      color: var(--white);
+      transform: rotate(90deg);
+    }
+
+    /* ===== PREMIUM FORMS ===== */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--light-60);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+      background: var(--white);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+      border-color: var(--danger);
+    }
+
+    .form-group .error-message {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    .form-group .hint {
+      color: var(--gray);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ===== PREMIUM LOADER ===== */
+    .loader {
+      border: 3px solid var(--light-60);
+      border-top: 3px solid var(--secondary);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ===== PREMIUM TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--white);
+      color: var(--dark);
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-2xl);
+      z-index: 3000;
+      animation: slideInRight 0.3s ease;
+      border-left: 4px solid var(--success);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .toast.error {
+      border-left-color: var(--danger);
+    }
+
+    .toast.warning {
+      border-left-color: var(--warning);
+    }
+
+    .toast.info {
+      border-left-color: var(--info);
+    }
+
+    .toast-icon {
+      font-size: 1.5rem;
+    }
+
+    .toast.success .toast-icon {
+      color: var(--success);
+    }
+
+    .toast.error .toast-icon {
+      color: var(--danger);
+    }
+
+    .toast.warning .toast-icon {
+      color: var(--warning);
+    }
+
+    .toast.info .toast-icon {
+      color: var(--info);
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-weight: bold;
+      margin-bottom: 0.2rem;
+    }
+
+    .toast-message {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .toast-close {
+      cursor: pointer;
+      color: var(--gray);
+      transition: var(--transition);
+    }
+
+    .toast-close:hover {
+      color: var(--dark);
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ===== DARK MODE ===== */
+    .dark-mode {
+      --light: #0f172a;
+      --light-80: #1e293b;
+      --light-60: #334155;
+      --light-40: #475569;
+      --white: #1e293b;
+      --dark: #f8fafc;
+      --dark-80: #f1f5f9;
+      --dark-60: #e2e8f0;
+      --dark-40: #cbd5e1;
+      --gray: #94a3b8;
+    }
+
+    .dark-mode .card,
+    .dark-mode .plan-card,
+    .dark-mode .service-card,
+    .dark-mode .testimonial-card,
+    .dark-mode .modal-content,
+    .dark-mode .search-container {
+      background: var(--light);
+    }
+
+    .dark-mode .nav-menu a,
+    .dark-mode .user-menu span,
+    .dark-mode .theme-toggle i,
+    .dark-mode .menu-icon i {
+      color: var(--dark);
+    }
+
+    .dark-mode .dropdown-menu {
+      background: var(--light);
+    }
+
+    .dark-mode .dropdown-section a {
+      color: var(--dark);
+    }
+
+    .dark-mode .menu-title {
+      color: var(--dark);
+    }
+
+    .dark-mode .menu-subtitle {
+      color: var(--gray);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1200px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .hero-image {
+        display: none;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--white);
+        flex-direction: column;
+        padding: 2rem;
+        transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        z-index: 999;
+        overflow-y: auto;
+      }
+
+      .nav-menu.show {
+        left: 0;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+
+      .auth-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .auth-buttons .btn {
+        width: 100%;
+      }
+
+      .hero-content {
+        padding: 2rem;
+      }
+
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-buttons .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== UTILITY CLASSES ===== */
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .text-right { text-align: right; }
+    
+    .mt-1 { margin-top: 0.5rem; }
+    .mt-2 { margin-top: 1rem; }
+    .mt-3 { margin-top: 1.5rem; }
+    .mt-4 { margin-top: 2rem; }
+    .mt-5 { margin-top: 3rem; }
+    
+    .mb-1 { margin-bottom: 0.5rem; }
+    .mb-2 { margin-bottom: 1rem; }
+    .mb-3 { margin-bottom: 1.5rem; }
+    .mb-4 { margin-bottom: 2rem; }
+    .mb-5 { margin-bottom: 3rem; }
+    
+    .p-1 { padding: 0.5rem; }
+    .p-2 { padding: 1rem; }
+    .p-3 { padding: 1.5rem; }
+    .p-4 { padding: 2rem; }
+    .p-5 { padding: 3rem; }
+    
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .glass-dark {
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* ===== MISSING FORM PROGRESS STYLES ===== */
+.form-progress {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.form-progress::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--light-60);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.progress-step {
+  width: 45px;
+  height: 45px;
+  background: var(--white);
+  border: 3px solid var(--light-60);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 2;
+  transition: var(--transition);
+}
+
+.progress-step.active {
+  background: var(--secondary-gradient);
+  border-color: var(--secondary);
+  color: var(--primary);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-glow);
+}
+
+.progress-step.completed {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+/* ===== FORM STEP STYLES ===== */
+.form-step {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== CHECKBOX STYLES ===== */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* ===== AUTH FORM STYLES ===== */
+.auth-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--light-60);
+  padding-bottom: 1rem;
+}
+
+.auth-tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.auth-tab.active {
+  color: var(--secondary);
+  border-bottom: 3px solid var(--secondary);
+  background: linear-gradient(to top, var(--secondary-light), transparent);
+}
+
+.auth-form {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.auth-form.active {
+  display: block;
+}
+
+/* ===== MARKET WIDGET STYLES ===== */
+.market-widget {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+}
+
+.market-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--light-60);
+}
+
+.market-item:last-child {
+  border-bottom: none;
+}
+
+.market-symbol {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.market-price {56
+  color: var(--success);
+  font-weight: 600;
+}
+
+.market-change.positive {
+  color: var(--success);
+}
+
+.market-change.negative {
+  color: var(--danger);
+}
+  </style>
+</head>
+<body>
+
+<!-- PREMIUM HEADER -->
+<header id="header">
+  <div style="flex:1; display: flex; align-items: center;">
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+  
+  <div class="logo">
+    <img src="https://i.ibb.co/svxj52ny/seedwel.png" alt="Seedwel Investment" onclick="showPage('home')">
+    <div class="logo-glow"></div>
+  </div>
+  
+  <div style="flex:1; display:flex; justify-content:flex-end; align-items:center; gap:1rem">
+    <!-- Auth Buttons -->
+    <div class="auth-buttons" id="authButtons">
+      <button class="btn btn-primary" onclick="showAuthModal('login')">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      <button class="btn btn-secondary" onclick="showAuthModal('register')">
+        <i class="fas fa-user-plus"></i> Register
+      </button>
+    </div>
+    
+    <!-- User Menu -->
+    <div class="user-menu" id="userMenu" style="display:none">
+      <div class="user-avatar" id="userAvatar"></div>
+      <span id="userName"></span>
+      <i class="fas fa-chevron-down"></i>
+      
+      <!-- Premium Dropdown Menu -->
+      <div class="dropdown-menu" id="dropdownMenu">
+        <div class="dropdown-header">
+          <div class="dropdown-avatar" id="dropdownAvatar"></div>
+          <div class="dropdown-user-info">
+            <h4 id="dropdownName">John Doe</h4>
+            <p id="dropdownEmail">john@example.com</p>
+          </div>
+        </div>
+        
+        <div class="dropdown-section">
+          <a href="#" onclick="showPage('profile'); return false;">
+            <div class="menu-icon-wrapper"><i class="fas fa-user-circle"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">My Profile</span>
+              <span class="menu-subtitle">View and edit profile</span>
+            </div>
+            <span class="menu-badge"></span>
+          </a>
+          
+          <a href="#" onclick="showPage('wallet'); return false;">
+            <div class="menu-icon-wrapper"><i class="fas fa-wallet"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">My Wallet</span>
+              <span class="menu-subtitle">Balance & transactions</span>
+            </div>
+            <span class="menu-badge" id="walletBadge">$0</span>
+          </a>
+          
+          <a href="#" onclick="showPage('investments'); return false;">
+            <div class="menu-icon-wrapper"><i class="fas fa-chart-line"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">My Investments</span>
+              <span class="menu-subtitle">Track your portfolio</span>
+            </div>
+            <span class="menu-badge" id="investmentBadge">0</span>
+          </a>
+          
+          <a href="#" onclick="showPage('applications'); return false;">
+            <div class="menu-icon-wrapper"><i class="fas fa-file-alt"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">Applications</span>
+              <span class="menu-subtitle">Track your applications</span>
+            </div>
+            <span class="menu-badge" id="applicationBadge">0</span>
+          </a>
+        </div>
+        
+        <div class="dropdown-divider"></div>
+        
+        <div class="dropdown-section">
+          <a href="#" onclick="showPage('referrals'); return false;">
+            <div class="menu-icon-wrapper"><i class="fas fa-users"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">Referrals</span>
+              <span class="menu-subtitle">Invite friends, earn rewards</span>
+            </div>
+            <span class="menu-badge" id="referralBadge">0</span>
+          </a>
+          
+          <a href="#" onclick="showPage('location'); return false;">
+            <div class="menu-icon-wrapper"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">Live Location</span>
+              <span class="menu-subtitle">Track your position</span>
+            </div>
+          </a>
+          
+          <a href="#" onclick="showPage('settings'); return false;">
+            <div class="menu-icon-wrapper"><i class="fas fa-cog"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">Settings</span>
+              <span class="menu-subtitle">Account preferences</span>
+            </div>
+          </a>
+        </div>
+        
+        <div class="dropdown-divider"></div>
+        
+        <div class="dropdown-section">
+          <a href="#" onclick="logout()" class="logout-btn">
+            <div class="menu-icon-wrapper"><i class="fas fa-sign-out-alt"></i></div>
+            <div class="menu-text">
+              <span class="menu-title">Logout</span>
+              <span class="menu-subtitle">Sign out of your account</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleDarkMode()">
+      <i class="fas fa-moon" id="themeIcon"></i>
+    </div>
+  </div>
+  
+  <!-- Navigation Menu -->
+  <nav class="nav-menu" id="navMenu">
+    <a href="#" onclick="showPage('home', event)">Home</a>
+    <a href="#" onclick="showPage('investments', event)">Invest</a>
+    <a href="#" onclick="showPage('dashboard', event)">Dashboard</a>
+    <a href="#" onclick="showPage('community', event)">Community</a>
+    <a href="#" onclick="showPage('reviews', event)">Reviews</a>
+    <a href="#" onclick="showPage('about', event)">About</a>
+    <a href="#" onclick="showPage('contact', event)">Contact</a>
+  </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main id="mainContent">
+  <div id="pageLoader" class="loader" style="display:none"></div>
+  <div id="pageContent"></div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <img src="https://i.ibb.co/svxj52ny/seedwel.png" alt="Seedwel Investment" style="height: 50px; margin-bottom: 1.5rem;">
+      <p>Seedwel Investment Limited is a financial services company focused on empowering individuals and communities through accessible financial solutions.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#" onclick="showPage('about'); return false;"><i class="fas fa-chevron-right"></i> About Us</a></li>
+        <li><a href="#" onclick="showPage('investments'); return false;"><i class="fas fa-chevron-right"></i> Investment Plans</a></li>
+        <li><a href="#" onclick="showPage('community'); return false;"><i class="fas fa-chevron-right"></i> Community</a></li>
+        <li><a href="#" onclick="showPage('reviews'); return false;"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+        <li><a href="#" onclick="showPage('contact'); return false;"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-col">
+      <h3>Our Services</h3>
+      <ul>
+        <li><a href="#" onclick="showPage('investments'); return false;"><i class="fas fa-chevron-right"></i> Investment Plans</a></li>
+        <li><a href="#" onclick="showPage('savings'); return false;"><i class="fas fa-chevron-right"></i> Savings Programs</a></li>
+        <li><a href="#" onclick="showPage('insurance'); return false;"><i class="fas fa-chevron-right"></i> Funeral Cover</a></li>
+        <li><a href="#" onclick="showPage('loan'); return false;"><i class="fas fa-chevron-right"></i> Loan Services</a></li>
+        <li><a href="#" onclick="showPage('scholarship'); return false;"><i class="fas fa-chevron-right"></i> Scholarships</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-col">
+      <h3>Contact Info</h3>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> <strong>Zambia:</strong> +260 973 028 342</li>
+        <li><i class="fas fa-map-marker-alt"></i> <strong>Eswatini:</strong> +268 7658 1804</li>
+        <li><i class="fas fa-envelope"></i> info@seedwelinvest.com</li>
+        <li><i class="fas fa-globe"></i> www.seedwelinvest.com</li>
+        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2026 Seedwel Investment Limited. All rights reserved. | Reg No: 2021/123456 | Licensed by SEC</p>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeAuthModal()">&times;</span>
+    
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+      <div class="auth-tab" onclick="switchAuthTab('register')">Register</div>
+    </div>
+    
+    <div id="loginForm" class="auth-form active">
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" ="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" ="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label class="checkbox">
+            <input type="checkbox" id="rememberMe"> Remember me
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
+        <p style="text-align:center; margin-top:1rem">
+          <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+        </p>
+      </form>
+    </div>
+    
+    <div id="registerForm" class="auth-form">
+      <div style="background: var(--secondary-light); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem; text-align: center; border: 2px dashed var(--secondary);">
+        <p style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">💰 One-time Membership Fee: $50 USD</p>
+        <p style="color: var(--gray); font-size: 0.95rem;">Pay after registration approval to activate your account</p>
+      </div>
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="regName" ="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="regEmail" ="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="regPhone" ="e.g., +268 XXX XXX XXX" required>
+        </div>
+        <div class="form-group">
+          <label>Referral Code (Optional)</label>
+          <input type="text" id="regReferral" ="Enter referral code if you have one">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="regPassword" ="Create a password" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" id="regConfirmPassword" ="Confirm your password" required>
+        </div>
+        <div class="form-group">
+          <label class="checkbox">
+            <input type="checkbox" id="terms" required> I agree to the <a href="#">Terms & Conditions</a>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Register (Membership Fee: $50)</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- KYC MODAL -->
+<div id="kycModal" class="modal">
+  <div class="modal-content" style="max-width: 700px;">
+    <span class="modal-close" onclick="closeModal('kyc')">&times;</span>
+    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">KYC Identity Verification</h2>
+    <p style="color: var(--gray); margin-bottom: 2rem; line-height: 1.6;">
+      Please upload your identification documents and take a live photo to verify your identity. All documents must be clear and legible.
+    </p>
+    
+    <div class="form-progress" style="margin-bottom: 2rem;">
+      <div class="progress-step active" data-step="1">1</div>
+      <div class="progress-step" data-step="2">2</div>
+      <div class="progress-step" data-step="3">3</div>
+    </div>
+    
+    <form onsubmit="submitKYC(event)">
+      <div id="kycStep1" class="form-step">
+        <h3 style="margin-bottom: 1.5rem;">Personal Information</h3>
+        
+        <div class="form-group">
+          <label>Full Name (as per ID)</label>
+          <input type="text" id="kycFullName" ="Enter your full name exactly as on ID" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" id="kycDob" required>
+        </div>
+        
+        <div class="form-group">
+          <label>ID Type</label>
+          <select id="kycIdType" required>
+            <option value="">Select ID Type</option>
+            <option value="national">National ID</option>
+            <option value="passport">Passport</option>
+            <option value="driver">Driver's License</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>ID Number</label>
+          <input type="text" id="kycIdNumber" ="Enter your ID number" required>
+        </div>
+        
+        <button type="button" class="btn btn-primary" onclick="nextKYCStep(1)">Next Step</button>
+      </div>
+      
+      <div id="kycStep2" class="form-step" style="display: none;">
+        <h3 style="margin-bottom: 1.5rem;">Document Upload</h3>
+        
+        <div class="form-group">
+          <label>Upload Front of ID</label>
+          <input type="file" id="kycFront" accept="image/*" required style="padding: 0.5rem;">
+          <small class="hint">Upload a clear image of the front of your ID (JPG, PNG)</small>
+        </div>
+        
+        <div class="form-group">
+          <label>Upload Back of ID</label>
+          <input type="file" id="kycBack" accept="image/*" required style="padding: 0.5rem;">
+          <small class="hint">Upload a clear image of the back of your ID</small>
+        </div>
+        
+        <div style="display: flex; gap: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="prevKYCStep(2)">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextKYCStep(2)">Next Step</button>
+        </div>
+      </div>
+      
+      <div id="kycStep3" class="form-step" style="display: none;">
+        <h3 style="margin-bottom: 1.5rem;">Live Photo & Address</h3>
+        
+        <div class="form-group">
+          <label>Live Photo / Selfie</label>
+          <input type="file" id="kycSelfie" accept="image/*" required style="padding: 0.5rem;">
+          <small class="hint">Take a live photo of yourself holding your ID</small>
+        </div>
+        
+        <div class="form-group">
+          <label>Proof of Address (Optional)</label>
+          <input type="file" id="kycAddress" accept="image/*,.pdf" style="padding: 0.5rem;">
+          <small class="hint">Utility bill or bank statement (not older than 3 months)</small>
+        </div>
+        
+        <div class="form-group">
+          <label class="checkbox">
+            <input type="checkbox" id="kycConfirm" required> I confirm that all information provided is correct
+          </label>
+        </div>
+        
+        <div style="display: flex; gap: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="prevKYCStep(3)">Previous</button>
+          <button type="submit" class="btn btn-primary">Submit KYC Verification</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- INVESTMENT MODAL -->
+<div id="investmentModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('investment')">&times;</span>
+    <h2 style="margin-bottom: 1.5rem;">Apply for Investment</h2>
+    <form onsubmit="submitInvestment(event)">
+      <div class="form-group">
+        <label>Select Investment Plan</label>
+        <select id="investPlan" required>
+          <option value="">Choose a plan</option>
+          <option value="starter">Starter Plan - 5% APY</option>
+          <option value="growth">Growth Plan - 8% APY</option>
+          <option value="premium">Premium Plan - 12% APY</option>
+          <option value="retirement">Retirement Plan - 7% APY</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Investment Amount ($)</label>
+        <input type="number" id="investAmount" min="100" ="Enter amount" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Investment Duration</label>
+        <select id="investDuration" required>
+          <option value="">Select duration</option>
+          <option value="3">3 months</option>
+          <option value="6">6 months</option>
+          <option value="12">1 year</option>
+          <option value="24">2 years</option>
+          <option value="36">3 years</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select id="investPayment" required>
+          <option value="">Select method</option>
+          <option value="bank">Bank Transfer</option>
+          <option value="mtn">MTN Money</option>
+          <option value="airtel">Airtel Money</option>
+          <option value="card">Credit/Debit Card</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Source of Funds</label>
+        <select id="investSource" required>
+          <option value="">Select source</option>
+          <option value="salary">Salary/Employment</option>
+          <option value="business">Business Income</option>
+          <option value="savings">Personal Savings</option>
+          <option value="inheritance">Inheritance</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Investment Goals (Optional)</label>
+        <textarea id="investGoals" rows="3" ="Tell us about your investment goals..."></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" style="width:100%">Submit Application</button>
+    </form>
+  </div>
+</div>
+
+<!-- WITHDRAWAL MODAL -->
+<div id="withdrawModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('withdraw')">&times;</span>
+    <h2 style="margin-bottom: 1.5rem;">Withdraw Funds</h2>
+    <form onsubmit="processWithdrawal(event)">
+      <div class="form-group">
+        <label>Amount to Withdraw ($)</label>
+        <input type="number" id="withdrawAmount" min="10" ="Enter amount" required>
+        <small class="hint">Available balance: $<span id="availableBalance">0</span></small>
+      </div>
+      
+      <div class="form-group">
+        <label>Withdrawal Method</label>
+        <select id="withdrawMethod" required>
+          <option value="">Select method</option>
+          <option value="bank">Bank Transfer</option>
+          <option value="mtn">MTN Money</option>
+          <option value="airtel">Airtel Money</option>
+          <option value="zamtel">Zamtel Kwacha</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Account/Phone Details</label>
+        <textarea id="withdrawDetails" rows="3" ="Provide your bank account or mobile money details" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label>Reason for Withdrawal (Optional)</label>
+        <textarea id="withdrawReason" rows="2" ="Tell us why you're withdrawing..."></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" style="width:100%">Request Withdrawal</button>
+    </form>
+  </div>
+</div>
+
+<!-- DEPOSIT MODAL -->
+<div id="depositModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('deposit')">&times;</span>
+    <h2 style="margin-bottom: 1.5rem;">Deposit Funds</h2>
+    <form onsubmit="processDeposit(event)">
+      <div class="form-group">
+        <label>Amount to Deposit ($)</label>
+        <input type="number" id="depositAmount" min="10" ="Enter amount" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select id="depositMethod" required>
+          <option value="">Select method</option>
+          <option value="bank">Bank Transfer</option>
+          <option value="mtn">MTN Money</option>
+          <option value="airtel">Airtel Money</option>
+          <option value="Paypal">Paypal</option>
+          <option value="card">Credit/Debit Card</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Phone Number (for mobile money)</label>
+        <input type="tel" id="depositPhone" ="e.g., 76xxxxxx">
+        <small class="hint">Required for mobile money payments</small>
+      </div>
+      
+      <div class="form-group">
+        <label>Transaction Reference (Optional)</label>
+        <input type="text" id="depositRef" ="Enter transaction reference if available">
+      </div>
+      
+      <button type="submit" class="btn btn-primary" style="width:100%">Submit Deposit Request</button>
+    </form>
+  </div>
+</div>
+
+<!-- LOAN MODAL -->
+<div id="loanModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('loan')">&times;</span>
+    <h2 style="margin-bottom: 1.5rem;">Loan Application</h2>
+    <form onsubmit="submitLoan(event)">
+      <div class="form-group">
+        <label>Loan Type</label>
+        <select id="loanType" required>
+          <option value="">Select loan type</option>
+          <option value="personal">Personal Loan</option>
+          <option value="business">Business Loan</option>
+          <option value="education">Education Loan</option>
+          <option value="emergency">Emergency Loan</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Loan Amount ($)</label>
+        <input type="number" id="loanAmount" min="100" ="Enter amount" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Purpose of Loan</label>
+        <input type="text" id="loanPurpose" ="What will the loan be used for?" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Repayment Period (months)</label>
+        <select id="loanPeriod" required>
+          <option value="">Select period</option>
+          <option value="3">3 months</option>
+          <option value="6">6 months</option>
+          <option value="12">12 months</option>
+          <option value="24">24 months</option>
+          <option value="36">36 months</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Employment Status</label>
+        <select id="loanEmployment" required>
+          <option value="">Select status</option>
+          <option value="employed">Employed</option>
+          <option value="self-employed">Self-Employed</option>
+          <option value="business">Business Owner</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Monthly Income ($)</label>
+        <input type="number" id="loanIncome" ="Enter monthly income" required>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" style="width:100%">Submit Loan Application</button>
+    </form>
+  </div>
+</div>
+
+<!-- CALCULATOR MODAL -->
+<div id="calculatorModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('calculator')">&times;</span>
+    <h2 style="margin-bottom: 1.5rem;">Investment Calculator</h2>
+    
+    <div class="form-group">
+      <label>Investment Amount ($)</label>
+      <input type="number" id="calcAmount" value="1000" min="100" oninput="calculateReturns()">
+    </div>
+    
+    <div class="form-group">
+      <label>Investment Plan</label>
+      <select id="calcPlan" onchange="calculateReturns()">
+        <option value="5">Starter Plan - 5% APY</option>
+        <option value="8" selected>Growth Plan - 8% APY</option>
+        <option value="12">Premium Plan - 12% APY</option>
+        <option value="7">Retirement Plan - 7% APY</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Duration (months)</label>
+      <select id="calcDuration" onchange="calculateReturns()">
+        <option value="3">3 months</option>
+        <option value="6">6 months</option>
+        <option value="12" selected>1 year</option>
+        <option value="24">2 years</option>
+        <option value="36">3 years</option>
+        <option value="60">5 years</option>
+      </select>
+    </div>
+    
+    <div style="background: var(--light); padding: 2rem; border-radius: var(--radius); margin: 2rem 0;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <span>Principal Amount:</span>
+        <span id="calcPrincipal" style="font-weight: bold;">$1,000.00</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <span>Interest Earned:</span>
+        <span id="calcInterest" style="color: var(--success); font-weight: bold;">$80.00</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <span>Total Returns:</span>
+        <span id="calcTotal" style="color: var(--primary); font-weight: bold; font-size: 1.2rem;">$1,080.00</span>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <span>Effective APY:</span>
+        <span id="calcAPY" style="color: var(--secondary); font-weight: bold;">8.00%</span>
+      </div>
+    </div>
+    
+    <button class="btn btn-primary" style="width:100%; margin-bottom: 1rem;" onclick="openModal('investment')">Apply for Investment</button>
+    <button class="btn btn-secondary" style="width:100%;" onclick="closeModal('calculator')">Close</button>
+  </div>
+</div>
+
+<script>
+  // ===== FIREBASE INIT =====
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-BpRy-RVc2rqIG6uiRu_XrGEu1ZGnQwU",
+    authDomain: "seedwel-investment-limited.firebaseapp.com",
+    projectId: "seedwel-investment-limited",
+    storageBucket: "seedwel-investment-limited.firebasestorage.app",
+    messagingSenderId: "197778268619",
+    appId: "1:197778268619:web:92f29d88fa5a22dbfa964e"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+  
+  // ===== INITIALIZE AOS =====
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+  });
+  
+  // ===== INITIALIZE EMAILJS =====
+  emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+  
+  // ===== INITIALIZE STRIPE =====
+  const stripe = Stripe("YOUR_STRIPE_PUBLISHABLE_KEY"); // Replace with your Stripe key
+  
+  // ===== GLOBAL STATE =====
+  let currentUser = null;
+  let userData = null;
+  let currentPage = 'home';
+  let locationWatchId = null;
+  let userMap = null;
+  let userMarker = null;
+  let notifications = [];
+  let marketData = [];
+  
+  // ===== AUTH =====
+  auth.onAuthStateChanged(async user => {
+    currentUser = user;
+    updateUI(user);
+    if (user) {
+      await loadUserData();
+      startLocationTracking();
+      loadNotifications();
+      loadMarketData();
+    } else {
+      stopLocationTracking();
+    }
+  });
+  
+  async function loadUserData() {
+    const doc = await db.collection('users').doc(currentUser.uid).get();
+    if (doc.exists) {
+      userData = doc.data();
+      updateBadges();
+    }
+  }
+  
+  function updateUI(user) {
+    const authBtns = document.getElementById('authButtons');
+    const userMenu = document.getElementById('userMenu');
+    if (user) {
+      authBtns.style.display = 'none';
+      userMenu.style.display = 'flex';
+      const initial = (user.displayName || 'U').charAt(0).toUpperCase();
+      document.getElementById('userAvatar').textContent = initial;
+      document.getElementById('userName').textContent = user.displayName || 'User';
+      document.getElementById('dropdownAvatar').textContent = initial;
+      document.getElementById('dropdownName').textContent = user.displayName || 'User';
+      document.getElementById('dropdownEmail').textContent = user.email || '';
+    } else {
+      authBtns.style.display = 'flex';
+      userMenu.style.display = 'none';
+    }
+  }
+  
+  function updateBadges() {
+    if (userData) {
+      const walletBadge = document.getElementById('walletBadge');
+      if (walletBadge) walletBadge.textContent = `$${userData.balance || 0}`;
+      
+      const investmentBadge = document.getElementById('investmentBadge');
+      if (investmentBadge) investmentBadge.textContent = userData.investmentCount || 0;
+      
+      const referralBadge = document.getElementById('referralBadge');
+      if (referralBadge) referralBadge.textContent = userData.referralCount || 0;
+      
+      const availableBalance = document.getElementById('availableBalance');
+      if (availableBalance) availableBalance.textContent = userData.balance || 0;
+    }
+  }
+  
+  // ===== LOCATION TRACKING =====
+  function startLocationTracking() {
+    if (navigator.geolocation) {
+      locationWatchId = navigator.geolocation.watchPosition(
+        async position => {
+          const { latitude, longitude } = position.coords;
+          
+          await db.collection('locations').doc(currentUser.uid).set({
+            userId: currentUser.uid,
+            displayName: currentUser.displayName,
+            email: currentUser.email,
+            latitude,
+            longitude,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            accuracy: position.coords.accuracy
+          });
+          
+          await db.collection('users').doc(currentUser.uid).collection('locationHistory').add({
+            latitude,
+            longitude,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          
+          if (userMap && userMarker) {
+            userMarker.setLatLng([latitude, longitude]);
+            userMap.setView([latitude, longitude]);
+          }
+        },
+        error => console.log('Location error:', error),
+        { enableHighAccuracy: true, maximumAge: 30000 }
+      );
+    }
+  }
+  
+  function stopLocationTracking() {
+    if (locationWatchId) {
+      navigator.geolocation.clearWatch(locationWatchId);
+    }
+  }
+  
+  // ===== MARKET DATA API =====
+  async function loadMarketData() {
+    try {
+      // Using Alpha Vantage API for demo (replace with your API key)
+      const response = await axios.get('https://www.alphavantage.co/query', {
+        params: {
+          function: 'TIME_SERIES_INTRADAY',
+          symbol: 'MSFT',
+          interval: '5min',
+          apikey: 'YOUR_API_KEY' // Replace with your API key
+        }
+      });
+      marketData = response.data;
+      updateMarketWidget();
+    } catch (error) {
+      console.log('Market data error:', error);
+    }
+  }
+  
+  function updateMarketWidget() {
+    // Update market data display
+  }
+  
+  // ===== NOTIFICATIONS =====
+  async function loadNotifications() {
+    const snapshot = await db.collection('notifications')
+      .where('userId', '==', currentUser.uid)
+      .orderBy('createdAt', 'desc')
+      .limit(10)
+      .get();
+    
+    notifications = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    updateNotificationBadge();
+  }
+  
+  function updateNotificationBadge() {
+    const unread = notifications.filter(n => !n.read).length;
+    // Update notification badge in UI
+  }
+  
+  function showNotification(title, message, type = 'info') {
+    showToast(message, type, title);
+  }
+  
+  // ===== TOAST SYSTEM =====
+  function showToast(message, type = 'success', title = '') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    const icons = {
+      success: 'fa-check-circle',
+      error: 'fa-exclamation-circle',
+      warning: 'fa-exclamation-triangle',
+      info: 'fa-info-circle'
+    };
+    
+    const titles = {
+      success: 'Success',
+      error: 'Error',
+      warning: 'Warning',
+      info: 'Information'
+    };
+    
+    toast.innerHTML = `
+      <div class="toast-icon"><i class="fas ${icons[type]}"></i></div>
+      <div class="toast-content">
+        <div class="toast-title">${title || titles[type]}</div>
+        <div class="toast-message">${message}</div>
+      </div>
+      <div class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></div>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      if (toast.parentElement) toast.remove();
+    }, 5000);
+  }
+  
+  // ===== NAVIGATION =====
+  function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('show');
+  }
+  
+  async function showPage(page, event) {
+    if (event) {
+      document.querySelectorAll('.nav-menu a').forEach(l => l.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    currentPage = page;
+    document.getElementById('navMenu').classList.remove('show');
+    showLoader();
+    
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    try {
+      switch(page) {
+        case 'home':
+          await loadHome();
+          break;
+        case 'investments':
+          await loadInvestments();
+          break;
+        case 'dashboard':
+          if (currentUser) await loadDashboard();
+          else showAuthModal('login');
+          break;
+        case 'wallet':
+          if (currentUser) await loadWallet();
+          else showAuthModal('login');
+          break;
+        case 'profile':
+          if (currentUser) await loadProfile();
+          else showAuthModal('login');
+          break;
+        case 'community':
+          await loadCommunity();
+          break;
+        case 'reviews':
+          await loadReviews();
+          break;
+        case 'about':
+          await loadAbout();
+          break;
+        case 'contact':
+          await loadContact();
+          break;
+        case 'applications':
+          if (currentUser) await loadApplications();
+          else showAuthModal('login');
+          break;
+        case 'referrals':
+          if (currentUser) await loadReferrals();
+          else showAuthModal('login');
+          break;
+        case 'location':
+          if (currentUser) await loadLocation();
+          else showAuthModal('login');
+          break;
+        case 'settings':
+          if (currentUser) await loadSettings();
+          else showAuthModal('login');
+          break;
+        case 'faq':
+          await loadFaq();
+          break;
+        case 'savings':
+          await loadSavings();
+          break;
+        case 'insurance':
+          await loadInsurance();
+          break;
+        case 'loan':
+          await loadLoanServices();
+          break;
+        case 'scholarship':
+          await loadScholarship();
+          break;
+        default:
+          await loadHome();
+      }
+    } catch (error) {
+      showToast(error.message, 'error');
+      await loadHome();
+    } finally {
+      hideLoader();
+      AOS.refresh();
+    }
+  }
+  
+// ===== HOME PAGE =====
+async function loadHome() {
+  const html = `
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div id="hero-particles" class="hero-particles"></div>
+      <div class="hero-content">
+        <div class="hero-text" data-aos="fade-right">
+          <h1>Welcome to <span>Seedwel Investment</span> Limited</h1>
+          <p>Seedwel Investment Limited is a premier financial services company dedicated to empowering individuals, families, and communities across Africa through innovative and accessible financial solutions. Our comprehensive platform provides structured investment opportunities, flexible savings programs, reliable insurance support, accessible loan services, and transformative educational scholarship initiatives.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-secondary" onclick="showAuthModal('register')">
+              <i class="fas fa-user-plus"></i> Join Now
+            </button>
+            <button class="btn btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+              <i class="fas fa-compass"></i> Explore Services
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="stat-number">$2.5M+</div>
+              <div class="stat-label">Total Investments</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-number">12K+</div>
+              <div class="stat-label">Active Members</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-number">15%</div>
+              <div class="stat-label">Max Returns</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-number">5</div>
+              <div class="stat-label">Countries</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image" data-aos="fade-left">
+          <img src="https://i.ibb.co/LDrQStq3/hero.jpg" alt="Seedwel Hero">
+          <div class="hero-image-shape"></div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services-section" style="padding-top: 4rem;">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Comprehensive Financial Services</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Discover a complete range of financial solutions designed to empower your journey toward financial independence and security</p>
+        
+        <!-- INVESTMENT SERVICES -->
+        <div class="service-card" style="margin-bottom: 4rem;" data-aos="fade-up">
+          <div class="grid-2" style="align-items: center;">
+            <div data-aos="fade-right">
+              <img src="https://i.ibb.co/SDbWdCVf/business-start-up.jpg" alt="Investment Opportunities" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+            </div>
+            <div data-aos="fade-left" style="padding-left: 2rem;">
+              <div class="service-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 1rem;">Investment Opportunities</h3>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Seedwel Investment Limited offers a diverse portfolio of structured investment opportunities designed to help members grow their financial resources responsibly and sustainably. Our investment programs cater to different risk appetites and financial goals, from conservative savers to aggressive growth seekers.
+              </p>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Investment Plans Include:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Starter Plan (5% APY):</strong> Perfect for beginners, minimum investment $100</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Growth Plan (8% APY):</strong> Balanced growth for moderate risk takers, minimum $500</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Premium Plan (12% APY):</strong> High-yield opportunities for experienced investors, minimum $1,000</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Retirement Plan (7% APY):</strong> Long-term wealth building for retirement, minimum $200</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; font-size: 1.1rem;">
+                Members can monitor their investment activity through their personal dashboard, track real-time performance, receive important notifications, and access detailed reports on their portfolio growth. Our investment advisors are available to guide you in selecting the right investment strategy for your financial goals.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- SAVINGS PROGRAMS -->
+        <div class="service-card" style="margin-bottom: 4rem;" data-aos="fade-up">
+          <div class="grid-2" style="align-items: center;">
+            <div data-aos="fade-right" style="order: 2; padding-left: 2rem;">
+              <img src="https://i.ibb.co/zT6mnXbY/saving.jpg" alt="Savings Programs" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+            </div>
+            <div data-aos="fade-left" style="order: 1;">
+              <div class="service-icon">
+                <i class="fas fa-piggy-bank"></i>
+              </div>
+              <h3 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 1rem;">Savings Programs</h3>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Our comprehensive savings programs are designed to help individuals develop strong financial habits and prepare for future goals. Whether you're saving for education, a home, business startup, or emergency fund, we have a savings plan tailored to your needs.
+              </p>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Savings Plan Options:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Regular Savings Account:</strong> Flexible deposits and withdrawals, interest rate 2% APY</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Goal-Based Savings:</strong> Target-specific savings with bonus interest upon goal completion, up to 4% APY</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Fixed Deposit:</strong> Lock funds for higher returns, rates from 3% to 6% APY depending on term</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Emergency Fund:</strong> Special account with quick access for unexpected expenses, 2.5% APY</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; font-size: 1.1rem;">
+                Our digital platform allows members to make regular contributions, set savings goals, track progress, and automate deposits. You'll receive milestone notifications and encouragement as you work toward your financial targets.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- INSURANCE & FUNERAL COVER -->
+        <div class="service-card" style="margin-bottom: 4rem;" data-aos="fade-up">
+          <div class="grid-2" style="align-items: center;">
+            <div data-aos="fade-right">
+              <img src="https://i.ibb.co/k2jyFwMS/life.jpg" alt="Insurance & Funeral Cover" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+            </div>
+            <div data-aos="fade-left" style="padding-left: 2rem;">
+              <div class="service-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 1rem;">Insurance & Funeral Cover</h3>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Seedwel Investment Limited provides comprehensive insurance support services including funeral cover programs designed to protect you and your loved ones during difficult times. We understand that life is unpredictable, which is why we offer affordable and reliable coverage options.
+              </p>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Coverage Options:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Basic Funeral Cover:</strong> Up to $2,000 coverage, monthly premium $15</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Family Funeral Cover:</strong> Up to $5,000 coverage for member and dependents, monthly premium $35</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Extended Family Cover:</strong> Up to $10,000 coverage including extended family, monthly premium $60</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Life Insurance:</strong> Term life coverage from $10,000 to $100,000, competitive premiums based on age</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; font-size: 1.1rem;">
+                By enrolling in our funeral cover program, members ensure that their families receive immediate financial assistance for funeral arrangements and related expenses when the need arises. Claims are processed within 48 hours to provide timely support during emotional times.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- LOAN SERVICES -->
+        <div class="service-card" style="margin-bottom: 4rem;" data-aos="fade-up">
+          <div class="grid-2" style="align-items: center;">
+            <div data-aos="fade-right" style="order: 2; padding-left: 2rem;">
+              <img src="https://i.ibb.co/5XmQKVr4/loan.jpg" alt="Loan Services" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+            </div>
+            <div data-aos="fade-left" style="order: 1;">
+              <div class="service-icon">
+                <i class="fas fa-hand-holding-usd"></i>
+              </div>
+              <h3 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 1rem;">Loan Services</h3>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Our accessible loan services provide financial assistance to eligible members who require support for personal needs, education, business expansion, or emergency situations. We believe in responsible lending that empowers rather than burdens.
+              </p>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Loan Types Available:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Personal Loans:</strong> $100 - $5,000 for personal needs, flexible repayment up to 24 months</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Business Loans:</strong> $500 - $20,000 for entrepreneurs, repayment up to 36 months</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Education Loans:</strong> $200 - $10,000 for school fees and educational expenses</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Emergency Loans:</strong> Quick-disbursement loans for urgent needs, up to $1,000</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Loan Features:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Competitive interest rates from 5% to 15% APR</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Fast approval within 24-48 hours</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> No hidden fees or penalties</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Flexible repayment schedules</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; font-size: 1.1rem;">
+                Applications are reviewed based on company policies and eligibility criteria. Approved members receive funds directly to their wallet and can track repayment progress through their dashboard.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- SCHOLARSHIP PROGRAM -->
+        <div class="service-card" style="margin-bottom: 4rem;" data-aos="fade-up">
+          <div class="grid-2" style="align-items: center;">
+            <div data-aos="fade-right">
+              <img src="https://i.ibb.co/sdSGkV0Z/scholarship.jpg" alt="Scholarship Program" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+            </div>
+            <div data-aos="fade-left" style="padding-left: 2rem;">
+              <div class="service-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h3 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 1rem;">Scholarship Program</h3>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Seedwel Investment Limited is deeply committed to supporting education and community development through our transformative scholarship initiatives. We believe that education is the foundation of a prosperous future, and we're dedicated to helping deserving students achieve their academic dreams.
+              </p>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Scholarship Opportunities:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Academic Excellence Scholarship:</strong> For top-performing students, up to $1,000 per year</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Need-Based Scholarship:</strong> For students from low-income families, up to $2,000 per year</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>STEM Scholarship:</strong> For students pursuing science, technology, engineering, or mathematics</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Women in Leadership Scholarship:</strong> Supporting female students in leadership programs</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Eligibility Criteria:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Must be a registered member of Seedwel Investment Limited</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Minimum academic requirements as specified per scholarship</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Demonstrated financial need for need-based scholarships</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Active participation in community service (preferred)</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; font-size: 1.1rem;">
+                Scholarship applications are reviewed quarterly, and funds are disbursed directly to educational institutions. Through this initiative, we've helped over 200 students access quality education and build brighter futures.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- STUDENT SAVINGS PROGRAM -->
+        <div class="service-card" style="margin-bottom: 4rem;" data-aos="fade-up">
+          <div class="grid-2" style="align-items: center;">
+            <div data-aos="fade-right" style="order: 2; padding-left: 2rem;">
+              <img src="https://i.ibb.co/WWwTfGyR/student-saving.jpg" alt="Student Savings Program" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+            </div>
+            <div data-aos="fade-left" style="order: 1;">
+              <div class="service-icon">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+              <h3 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 1rem;">Student Savings Program</h3>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Our innovative Student Savings Program is specially designed to encourage young people to develop financial responsibility early in life. We believe that financial literacy and saving habits should be cultivated from a young age, setting the foundation for lifelong financial wellness.
+              </p>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Program Features:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Junior Saver Account:</strong> For ages 8-12, with parental supervision, interest rate 3% APY</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Teen Saver Account:</strong> For ages 13-17, independent saving with mentoring, interest rate 3.5% APY</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>College Saver Account:</strong> For students 18-24, higher interest rates up to 4% APY</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> <strong>Education Goal Tracker:</strong> Visual progress tracking toward education savings goals</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                <strong>Educational Benefits:</strong>
+              </p>
+              <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Free financial literacy workshops and resources</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Gamified saving challenges with rewards</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Monthly educational newsletters and tips</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i> Access to student-only events and webinars</li>
+              </ul>
+              <p style="color: var(--gray); line-height: 1.8; font-size: 1.1rem;">
+                Students who maintain consistent saving habits for 12 months receive bonus interest and are eligible for special rewards. The program has already enrolled over 1,500 young savers who are building strong financial foundations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- WHY CHOOSE US SECTION -->
+    <section class="services-section" style="background: var(--light-80);">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Why Choose Seedwel Investment Limited?</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Discover what makes us the trusted financial partner for thousands of individuals and families across Africa</p>
+        
+        <div class="grid-3" style="margin-top: 3rem;">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Security & Trust</h3>
+            <p>Your funds are protected with bank-level security, encrypted transactions, and regular audits. We're licensed and regulated by financial authorities in Zambia and Eswatini.</p>
+          </div>
+          
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <h3>Diverse Portfolio</h3>
+            <p>From conservative savings to high-growth investments, we offer a wide range of financial products to match your risk tolerance and financial goals.</p>
+          </div>
+          
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Digital Convenience</h3>
+            <p>Manage your entire financial life from our intuitive mobile app and web platform. Track investments, apply for loans, and access support 24/7.</p>
+          </div>
+          
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Community Focus</h3>
+            <p>We're not just a financial institution – we're a community partner. Our scholarship and community programs reinvest in the people we serve.</p>
+          </div>
+          
+          <div class="card" data-aos="fade-up" data-aos-delay="500">
+            <div class="card-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>24/7 Support</h3>
+            <p>Our customer support team is available around the clock to assist with any questions or concerns. Chat, email, or phone support always available.</p>
+          </div>
+          
+          <div class="card" data-aos="fade-up" data-aos-delay="600">
+            <div class="card-icon">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <h3>Responsible Lending</h3>
+            <p>We practice ethical lending with fair terms, no hidden fees, and financial education to ensure our members make informed borrowing decisions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- HOW IT WORKS SECTION -->
+    <section class="services-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">How It Works</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Get started with Seedwel Investment Limited in four simple steps</p>
+        
+        <div class="grid-4" style="margin-top: 3rem;">
+          <div class="card" style="text-align: center;" data-aos="fade-up" data-aos-delay="100">
+            <div style="width: 60px; height: 60px; background: var(--secondary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: bold; color: var(--primary);">1</div>
+            <h3>Register Account</h3>
+            <p>Create your account by providing basic information and paying the one-time membership fee of $50.</p>
+          </div>
+          
+          <div class="card" style="text-align: center;" data-aos="fade-up" data-aos-delay="200">
+            <div style="width: 60px; height: 60px; background: var(--secondary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: bold; color: var(--primary);">2</div>
+            <h3>Complete KYC</h3>
+            <p>Verify your identity by uploading your ID documents and completing the quick verification process.</p>
+          </div>
+          
+          <div class="card" style="text-align: center;" data-aos="fade-up" data-aos-delay="300">
+            <div style="width: 60px; height: 60px; background: var(--secondary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: bold; color: var(--primary);">3</div>
+            <h3>Fund Your Wallet</h3>
+            <p>Add funds to your wallet via bank transfer, mobile money, or card to start investing and saving.</p>
+          </div>
+          
+          <div class="card" style="text-align: center;" data-aos="fade-up" data-aos-delay="400">
+            <div style="width: 60px; height: 60px; background: var(--secondary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: bold; color: var(--primary);">4</div>
+            <h3>Start Growing</h3>
+            <p>Choose from our range of investment and savings products and watch your wealth grow!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- STATISTICS SECTION -->
+    <div class="stats-section" data-aos="fade-up">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+            <div class="stat-number">$2.5M+</div>
+            <div class="stat-label">Total Investments</div>
+          </div>
+          <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+            <div class="stat-number">12,500+</div>
+            <div class="stat-label">Active Members</div>
+          </div>
+          <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+            <div class="stat-number">$850K</div>
+            <div class="stat-label">Paid Returns</div>
+          </div>
+          <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Member Satisfaction</div>
+          </div>
+          <div class="stat-item" data-aos="zoom-in" data-aos-delay="500">
+            <div class="stat-number">200+</div>
+            <div class="stat-label">Scholarships Awarded</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- MEMBERSHIP SECTION -->
+    <div class="container">
+      <section class="services-section" style="margin: 5rem 0;">
+        <h2 class="section-title" data-aos="fade-up">Membership Registration</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;" data-aos="fade-up" data-aos-delay="100">
+          <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+            Becoming a member of Seedwel Investment Limited opens the door to a world of financial opportunities. Our membership is designed to be accessible, affordable, and valuable for individuals from all walks of life.
+          </p>
+          <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+            <strong>Membership Benefits:</strong>
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; margin-bottom: 2rem;">
+            <ul style="list-style: none;">
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Access to all investment plans</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Eligibility for loans up to $20,000</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Insurance coverage options</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Scholarship opportunities</li>
+            </ul>
+            <ul style="list-style: none;">
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Priority customer support</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Financial planning resources</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Member-only events and webinars</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success);"></i> Referral bonuses and rewards</li>
+            </ul>
+          </div>
+          <div style="background: var(--white); padding: 2rem; border-radius: var(--radius-2xl); margin: 2rem 0; border: 2px dashed var(--secondary); box-shadow: var(--shadow);">
+            <p style="color: var(--primary); line-height: 1.8; margin-bottom: 0.5rem; font-size: 1.5rem; font-weight: bold;">
+              💰 One-time Membership Fee: $50 USD
+            </p>
+            <p style="color: var(--gray); font-size: 1rem;">
+              Pay after registration approval to activate your account and access all services including investments, savings, loans, insurance, and scholarships.
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="showAuthModal('register')" style="padding: 1rem 4rem; font-size: 1.2rem;">
+            <i class="fas fa-user-plus"></i> Register Now
+          </button>
+        </div>
+      </section>
+    </div>
+    
+    <!-- KYC SECURITY SECTION -->
+    <div class="container">
+      <section class="services-section" style="margin: 5rem 0; background: var(--light); padding: 4rem; border-radius: var(--radius-2xl);">
+        <div class="grid-2" style="align-items: center;">
+          <div data-aos="fade-right">
+            <h2 class="section-title left">KYC Identity Verification</h2>
+            <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+              For security and compliance purposes, Seedwel Investment Limited requires all members to complete Know Your Customer (KYC) verification. During this process, members will upload identification documents and take a live photo using the platform camera to confirm their identity.
+            </p>
+            <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+              <strong>Required Documents:</strong>
+            </p>
+            <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 2rem; list-style: none;">
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-id-card" style="color: var(--secondary); margin-right: 0.5rem;"></i> Government-issued ID (National ID, Passport, or Driver's License)</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-camera" style="color: var(--secondary); margin-right: 0.5rem;"></i> Live photo/selfie holding your ID</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-file-alt" style="color: var(--secondary); margin-right: 0.5rem;"></i> Proof of address (utility bill or bank statement, optional)</li>
+            </ul>
+            <p style="color: var(--gray); line-height: 1.8; margin-bottom: 2rem; font-size: 1.1rem;">
+              This verification process helps protect members, prevent fraud, and ensure the safety of all financial activities on the platform. Your information is encrypted and securely stored.
+            </p>
+            <button class="btn btn-secondary" onclick="openModal('kyc')" style="padding: 1rem 3rem;">
+              <i class="fas fa-id-card"></i> Complete KYC
+            </button>
+          </div>
+          <div style="text-align: center;" data-aos="fade-left">
+            <div style="width: 150px; height: 150px; border-radius: 50%; background: var(--secondary-gradient); margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--primary); box-shadow: var(--shadow-2xl);">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- FOUNDER SECTION WITH ACTUAL IMAGE -->
+    <div class="container">
+      <section class="services-section" style="margin: 2rem 0; background: var(--light); padding: 2rem; border-radius: var(--radius-2xl);">
+        <div class="grid-2" style="align-items: center;">
+          <div style="text-align: center;" data-aos="fade-right">
+            <img src="https://i.ibb.co/RTbNh1hB/founder-2.jpg" alt="Founder Seedwel Kayaretu Masuku" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid var(--secondary); box-shadow: var(--shadow-2xl); margin-bottom: 1.5rem;">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Mr. Seedwel Kayaretu Masuku</h3>
+            <p style="color: var(--secondary); font-weight: 600;">Founder & Managing Director</p>
+          </div>
+          <div data-aos="fade-left">
+            <h2 class="section-title left">Our Founder & Visionary Leader</h2>
+            <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+              Seedwel Investment Limited was founded by Mr. Seedwel Kayaretu Masuku with a powerful vision of creating financial empowerment opportunities for communities across Africa. With over 15 years of experience in financial services and investment banking, Mr. Masuku recognized the need for accessible, transparent, and community-focused financial solutions.
+            </p>
+            <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+              <strong>Professional Background:</strong>
+            </p>
+            <ul style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; list-style: none;">
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-briefcase" style="color: var(--secondary); margin-right: 0.5rem;"></i> 15+ years in financial services and investment banking</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-university" style="color: var(--secondary); margin-right: 0.5rem;"></i> Former Senior Investment Banker at leading African financial institutions</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-globe-africa" style="color: var(--secondary); margin-right: 0.5rem;"></i> Expert in African markets and community development finance</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fas fa-award" style="color: var(--secondary); margin-right: 0.5rem;"></i> Recognized leader in financial inclusion initiatives</li>
+            </ul>
+            <div style="background: var(--secondary-light); padding: 1.5rem; border-radius: var(--radius); margin: 1.5rem 0; font-style: italic;">
+              <i class="fas fa-quote-left" style="color: var(--secondary); font-size: 1.5rem; margin-right: 0.5rem;"></i>
+              <span style="color: var(--primary); font-size: 1.1rem;">"I believe that every individual, regardless of their background, deserves access to tools that can help them build a secure financial future. Seedwel Investment Limited was born from this belief – to bridge the gap between traditional financial services and the communities that need them most."</span>
+            </div>
+            <p style="color: var(--gray); line-height: 1.8; font-size: 1.1rem;">
+              Under his visionary leadership, Seedwel has grown from a concept to a thriving platform serving thousands of members across Zambia and Eswatini. His unwavering commitment to financial inclusion, education, and community development continues to guide the company's mission, values, and strategic direction. Mr. Masuku personally reviews all major initiatives and ensures that every product and service aligns with the company's core purpose: empowering people through accessible finance.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- CONTACT & CTA SECTION -->
+    <div class="container">
+      <section class="services-section" style="margin: 5rem 0; background: var(--primary-gradient); padding: 4rem; border-radius: var(--radius-2xl); color: var(--white);">
+        <h2 class="section-title" style="color: var(--white);" data-aos="fade-up">Contact Us</h2>
+        <div class="grid-3" style="margin-top: 3rem;" data-aos="fade-up" data-aos-delay="100">
+          <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: var(--radius-xl); backdrop-filter: blur(10px);">
+            <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+            <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Zambia Office</h3>
+            <p style="opacity: 0.9; font-size: 1.2rem; margin-bottom: 0.5rem;">+260 973 028 342</p>
+            <p style="opacity: 0.9;">Chama, Zambia</p>
+            <p style="opacity: 0.9; margin-top: 0.5rem;">kasangani, Matumbo Road</p>
+          </div>
+          <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: var(--radius-xl); backdrop-filter: blur(10px);">
+            <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+            <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Eswatini Office</h3>
+            <p style="opacity: 0.9; font-size: 1.2rem; margin-bottom: 0.5rem;">+268 7658 1804</p>
+            <p style="opacity: 0.9;">Manzini, Eswatini</p>
+            <p style="opacity: 0.9; margin-top: 0.5rem;">Manzini, Eswatini</p>
+          </div>
+          <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: var(--radius-xl); backdrop-filter: blur(10px);">
+            <i class="fas fa-envelope" style="font-size: 2rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+            <h3 style="margin-bottom: 1rem; font-size: 0.5rem;">Email</h3>
+            <p style="opacity: 0.9; font-size: 0.5rem; margin-bottom: 0.5rem;">info@seedwelinvest.com</p>
+          </div>
+        </div>
+        
+        <!-- FINAL CTA -->
+        <div style="text-align: center; margin-top: 4rem;" data-aos="fade-up">
+          <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Start Your Financial Journey?</h2>
+          <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Join thousands of successful members today and take control of your financial future with Seedwel Investment Limited.
+          </p>
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-secondary" onclick="showAuthModal('register')" style="padding: 1.2rem 4rem; font-size: 1.2rem;">
+              <i class="fas fa-user-plus"></i> Get Started Now
+            </button>
+            <button class="btn btn-outline" style="background: transparent; border: 2px solid white; color: white; padding: 1.2rem 4rem; font-size: 1.2rem;" onclick="openModal('calculator')">
+              <i class="fas fa-calculator"></i> Calculate Returns
+            </button>
+          </div>
+          <p style="margin-top: 2rem; opacity: 0.8;">
+            <i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM | Sat: 9:00 AM - 1:00 PM
+          </p>
+        </div>
+      </section>
+    </div>
+    
+    <!-- TESTIMONIALS SECTION -->
+    <div class="testimonials-section" data-aos="fade-up">
+      <div class="container">
+        <h2 class="section-title">What Our Members Say</h2>
+        <p class="section-subtitle">Real stories from real people whose lives have been transformed by Seedwel</p>
+        <div class="swiper testimonials-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">JD</div>
+                  <div class="testimonial-info">
+                    <h4>John Dlamini</h4>
+                    <p>Investor since 2024 | Mbabane</p>
+                  </div>
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Seedwel Investment has transformed my financial future. The returns are consistent, the platform is easy to use, and their customer service is exceptional. I've already recommended them to my entire family."</p>
+                <div class="testimonial-date">March 15, 2026</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">MS</div>
+                  <div class="testimonial-info">
+                    <h4>Mary Sipho</h4>
+                    <p>Member since 2025 | Lusaka</p>
+                  </div>
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The savings program helped me save for my children's education. I was able to put away money consistently, and the bonus interest when I reached my goal was a wonderful surprise. I'm grateful for this platform."</p>
+                <div class="testimonial-date">February 28, 2026</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">PM</div>
+                  <div class="testimonial-info">
+                    <h4>Peter Mwale</h4>
+                    <p>Business Owner | Ndola</p>
+                  </div>
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The loan service helped me expand my business when I needed capital urgently. Fast approval, reasonable rates, and the repayment terms were flexible enough to work with my cash flow. I'm now planning my second investment with them."</p>
+                <div class="testimonial-date">January 10, 2026</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">EN</div>
+                  <div class="testimonial-info">
+                    <h4>Elizabeth Nkosi</h4>
+                    <p>Student | Manzini</p>
+                  </div>
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"I received a scholarship from Seedwel that covered my entire first year of university. This opportunity has changed my life and my family's future. I'm now a proud member and save whatever I can from my part-time job."</p>
+                <div class="testimonial-date">December 5, 2025</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('pageContent').innerHTML = html;
+  
+  // Initialize Swiper for testimonials
+  new Swiper('.testimonials-slider', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+  
+  // Initialize particles for hero section
+  if (typeof particlesJS !== 'undefined') {
+    particlesJS('hero-particles', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffd700' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: '#ffd700', opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+        modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+      },
+      retina_detect: true
+    });
+  }
+}
+  
+  // ===== AUTH FUNCTIONS =====
+  function showAuthModal(tab) {
+    document.getElementById('authModal').classList.add('show');
+    switchAuthTab(tab);
+  }
+  
+  function closeAuthModal() {
+    document.getElementById('authModal').classList.remove('show');
+  }
+  
+  function switchAuthTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+    
+    if (tab === 'login') {
+      document.querySelector('.auth-tab:first-child').classList.add('active');
+      document.getElementById('loginForm').classList.add('active');
+    } else {
+      document.querySelector('.auth-tab:last-child').classList.add('active');
+      document.getElementById('registerForm').classList.add('active');
+    }
+  }
+  
+  async function handleLogin(e) {
+    e.preventDefault();
+    showLoader();
+    
+    try {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      await auth.signInWithEmailAndPassword(email, password);
+      showToast('Login successful!', 'success', 'Welcome Back');
+      closeAuthModal();
+      showPage('dashboard');
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      hideLoader();
+    }
+  }
+  
+  async function handleRegister(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const phone = document.getElementById('regPhone').value;
+    const referral = document.getElementById('regReferral').value;
+    const password = document.getElementById('regPassword').value;
+    const confirm = document.getElementById('regConfirmPassword').value;
+    
+    if (password !== confirm) {
+      showToast('Passwords do not match', 'error');
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      await userCredential.user.updateProfile({ displayName: name });
+      
+      const referralCode = 'SEED' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      
+      await db.collection('users').doc(userCredential.user.uid).set({
+        name,
+        email,
+        phone,
+        referralCode,
+        referredBy: referral || null,
+        balance: 0,
+        totalInvestments: 0,
+        totalReturns: 0,
+        kycStatus: 'pending',
+        membershipFee: 50,
+        membershipPaid: false,
+        referralCount: 0,
+        referralEarnings: 0,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      if (referral) {
+        const referrerQuery = await db.collection('users').where('referralCode', '==', referral).get();
+        if (!referrerQuery.empty) {
+          await db.collection('users').doc(referrerQuery.docs[0].id).update({
+            referralCount: firebase.firestore.FieldValue.increment(1),
+            pendingReferrals: firebase.firestore.FieldValue.increment(1)
+          });
+        }
+      }
+      
+      // Send welcome email via EmailJS
+      emailjs.send('service_id', 'template_id', {
+        to_name: name,
+        to_email: email,
+        message: 'Welcome to Seedwel Investment Limited! Your registration was successful.'
+      });
+      
+      showToast('Registration successful! Please complete KYC verification.', 'success');
+      closeAuthModal();
+      openModal('kyc');
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      hideLoader();
+    }
+  }
+  
+  async function logout() {
+    stopLocationTracking();
+    await auth.signOut();
+    showToast('Logged out successfully', 'success');
+    showPage('home');
+  }
+  
+  function showForgotPassword() {
+    showToast('Password reset email will be sent', 'info');
+    // Implement password reset
+  }
+  
+  // ===== MODAL FUNCTIONS =====
+  function openModal(type) {
+    document.getElementById(type + 'Modal').classList.add('show');
+    
+    // Update available balance in withdrawal modal
+    if (type === 'withdraw' && userData) {
+      document.getElementById('availableBalance').textContent = userData.balance || 0;
+    }
+  }
+  
+  function closeModal(type) {
+    document.getElementById(type + 'Modal').classList.remove('show');
+  }
+  
+  // ===== KYC STEP FUNCTIONS =====
+  let currentKYCStep = 1;
+  
+  function nextKYCStep(step) {
+    document.getElementById(`kycStep${step}`).style.display = 'none';
+    document.getElementById(`kycStep${step + 1}`).style.display = 'block';
+    
+    document.querySelectorAll('.progress-step')[step - 1].classList.add('completed');
+    document.querySelectorAll('.progress-step')[step].classList.add('active');
+  }
+  
+  function prevKYCStep(step) {
+    document.getElementById(`kycStep${step}`).style.display = 'none';
+    document.getElementById(`kycStep${step - 1}`).style.display = 'block';
+    
+    document.querySelectorAll('.progress-step')[step - 2].classList.remove('completed');
+    document.querySelectorAll('.progress-step')[step - 1].classList.remove('active');
+    document.querySelectorAll('.progress-step')[step - 2].classList.add('active');
+  }
+  
+  async function submitKYC(e) {
+    e.preventDefault();
+    if (!currentUser) {
+      showAuthModal('login');
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      // Upload files to Firebase Storage
+      const files = {
+        front: document.getElementById('kycFront').files[0],
+        back: document.getElementById('kycBack').files[0],
+        selfie: document.getElementById('kycSelfie').files[0],
+        address: document.getElementById('kycAddress').files[0]
+      };
+      
+      const uploadPromises = [];
+      
+      for (const [key, file] of Object.entries(files)) {
+        if (file) {
+          const storageRef = storage.ref(`kyc/${currentUser.uid}/${key}_${Date.now()}`);
+          uploadPromises.push(storageRef.put(file));
+        }
+      }
+      
+      await Promise.all(uploadPromises);
+      
+      await db.collection('kyc').doc(currentUser.uid).set({
+        userId: currentUser.uid,
+        fullName: document.getElementById('kycFullName').value,
+        dob: document.getElementById('kycDob').value,
+        idType: document.getElementById('kycIdType').value,
+        idNumber: document.getElementById('kycIdNumber').value,
+        status: 'pending',
+        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      await db.collection('users').doc(currentUser.uid).update({
+        kycStatus: 'pending'
+      });
+      
+      showToast('KYC submitted successfully! We will verify your documents soon.', 'success');
+      closeModal('kyc');
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      hideLoader();
+    }
+  }
+  
+  // ===== TRANSACTION FUNCTIONS =====
+  async function processDeposit(e) {
+    e.preventDefault();
+    if (!currentUser) {
+      showAuthModal('login');
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      const amount = parseFloat(document.getElementById('depositAmount').value);
+      const method = document.getElementById('depositMethod').value;
+      const phone = document.getElementById('depositPhone').value;
+      const reference = document.getElementById('depositRef').value;
+      
+      await db.collection('transactions').add({
+        userId: currentUser.uid,
+        type: 'deposit',
+        amount,
+        method,
+        phone,
+        reference,
+        status: 'pending',
+        description: `Deposit via ${method.toUpperCase()}`,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      showNotification('Deposit Request', 'Your deposit request has been submitted', 'info');
+      showToast('Deposit request submitted! You will be notified once processed.', 'success');
+      closeModal('deposit');
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      hideLoader();
+    }
+  }
+  
+  async function processWithdrawal(e) {
+    e.preventDefault();
+    if (!currentUser) {
+      showAuthModal('login');
+      return;
+    }
+    
+    const amount = parseFloat(document.getElementById('withdrawAmount').value);
+    
+    if (amount > (userData?.balance || 0)) {
+      showToast('Insufficient balance', 'error');
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      const method = document.getElementById('withdrawMethod').value;
+      const details = document.getElementById('withdrawDetails').value;
+      const reason = document.getElementById('withdrawReason').value;
+      
+      await db.collection('transactions').add({
+        userId: currentUser.uid,
+        type: 'withdrawal',
+        amount,
+        method,
+        details,
+        reason,
+        status: 'pending',
+        description: `Withdrawal via ${method.toUpperCase()}`,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      await db.collection('users').doc(currentUser.uid).update({
+        balance: firebase.firestore.FieldValue.increment(-amount)
+      });
+      
+      showToast('Withdrawal request submitted!', 'success');
+      closeModal('withdraw');
+      
+      if (currentPage === 'wallet') {
+        await loadWallet();
+      }
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      hideLoader();
+    }
+  }
+  
+  async function submitInvestment(e) {
+    e.preventDefault();
+    if (!currentUser) {
+      showAuthModal('login');
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      const plan = document.getElementById('investPlan').value;
+      const amount = parseFloat(document.getElementById('investAmount').value);
+      const duration = document.getElementById('investDuration').value;
+      const paymentMethod = document.getElementById('investPayment').value;
+      const source = document.getElementById('investSource').value;
+      const goals = document.getElementById('investGoals').value;
+      
+      await db.collection('investments').add({
+        userId: currentUser.uid,
+        plan,
+        amount,
+        duration,
+        paymentMethod,
+        source,
+        goals,
+        status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      await db.collection('transactions').add({
+        userId: currentUser.uid,
+        type: 'investment',
+        amount,
+        status: 'pending',
+        description: `Investment in ${plan} plan`,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      showToast('Investment application submitted!', 'success');
+      closeModal('investment');
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      hideLoader();
+    }
+  }
+  
+  async function submitLoan(e) {
+    e.preventDefault();
+    if (!currentUser) {
+      showAuthModal('login');
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      const loanType = document.getElementById('loanType').value;
+      const amount = parseFloat(document.getElementById('loanAmount').value);
+      const purpose = document.getElementById('loanPurpose').value;
+      const period = document.getElementById('loanPeriod').value;
+      const employment = document.getElementById('loanEmployment').value;
+      const income = parseFloat(document.getElementById('loanIncome').value);
+      
+      await db.collection('loanApplications').add({
+        userId: currentUser.uid,
+        loanType,
+        amount,
+        purpose,
+        period,
+        employment,
+        income,
+        status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      
+      showToast('Loan application submitted!', 'success');
+      closeModal('loan');
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      hideLoader();
+    }
+  }
+  
+  // ===== CALCULATOR =====
+  function calculateReturns() {
+    const amount = parseFloat(document.getElementById('calcAmount')?.value) || 0;
+    const rate = parseFloat(document.getElementById('calcPlan')?.value) || 0;
+    const months = parseFloat(document.getElementById('calcDuration')?.value) || 12;
+    
+    const yearlyRate = rate / 100;
+    const monthlyRate = yearlyRate / 12;
+    const interest = amount * monthlyRate * months;
+    const total = amount + interest;
+    const effectiveAPY = (Math.pow(1 + monthlyRate, 12) - 1) * 100;
+    
+    document.getElementById('calcPrincipal').textContent = `$${amount.toFixed(2)}`;
+    document.getElementById('calcInterest').textContent = `$${interest.toFixed(2)}`;
+    document.getElementById('calcTotal').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('calcAPY').textContent = `${effectiveAPY.toFixed(2)}%`;
+  }
+  
+  // ===== DARK MODE =====
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const icon = document.getElementById('themeIcon');
+    
+    if (document.body.classList.contains('dark-mode')) {
+      icon.className = 'fas fa-sun';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      icon.className = 'fas fa-moon';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('themeIcon').className = 'fas fa-sun';
+  }
+  
+  // ===== HEADER SCROLL EFFECT =====
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+  
+  // ===== UTILITIES =====
+  function showLoader() {
+    document.getElementById('pageLoader').style.display = 'block';
+  }
+  
+  function hideLoader() {
+    document.getElementById('pageLoader').style.display = 'none';
+  }
+  
+  function filterInvestments() {
+    showToast('Searching investments...', 'info');
+    showPage('investments');
+  }
+  
+// ===== PLACEHOLDER PAGE FUNCTIONS =====
+async function loadInvestments() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Investment Plans</h1><div class="grid-3" id="allPlans"></div></div>';
+}
+
+async function loadDashboard() { 
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Dashboard</h1></div>'; 
+}
+
+async function loadWallet() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">My Wallet</h1></div>';
+  await loadWalletContent();
+}
+
+async function loadWalletContent() {
+  // Implement wallet content
+}
+
+async function loadProfile() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">My Profile</h1></div>';
+}
+
+async function loadCommunity() { 
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Community</h1></div>'; 
+}
+
+async function loadReviews() { 
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Reviews</h1></div>'; 
+}
+
+async function loadAbout() { 
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">About Us</h1></div>'; 
+}
+
+async function loadContact() { 
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Contact</h1></div>'; 
+}
+
+async function loadApplications() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">My Applications</h1></div>';
+}
+
+async function loadReferrals() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Referrals</h1></div>';
+}
+
+async function loadLocation() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Live Location</h1><div id="map" style="height: 500px;"></div></div>';
+  
+  setTimeout(() => {
+    userMap = L.map('map').setView([-15.3875, 28.3228], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(userMap);
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        userMap.setView([latitude, longitude], 15);
+        userMarker = L.marker([latitude, longitude]).addTo(userMap);
+      });
+    }
+  }, 100);
+}
+
+async function loadSettings() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Settings</h1></div>';
+}
+
+async function loadFaq() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">FAQ</h1></div>';
+}
+
+async function loadSavings() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Savings Programs</h1></div>';
+}
+
+async function loadInsurance() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Insurance & Funeral Cover</h1></div>';
+}
+
+async function loadLoanServices() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Loan Services</h1></div>';
+}
+
+async function loadScholarship() {
+  document.getElementById('pageContent').innerHTML = '<div class="container"><h1 class="section-title">Scholarship Program</h1></div>';
+}
+  
+// ===== INVESTMENTS PAGE =====
+async function loadInvestments() {
+  const html = `
+    <div class="container">
+      <h1 class="section-title" data-aos="fade-up">Investment Plans</h1>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Choose the perfect investment plan that matches your financial goals and risk tolerance</p>
+      
+      <!-- Investment Plans Grid -->
+      <div class="plans-grid" id="allPlans" data-aos="fade-up" data-aos-delay="200"></div>
+      
+      <!-- Investment Information Section -->
+      <div class="services-section" style="margin-top: 4rem;">
+        <h2 class="section-title" data-aos="fade-up">Investment Guide</h2>
+        
+        <div class="grid-2" style="margin: 3rem 0; align-items: center;">
+          <div data-aos="fade-right">
+            <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Investment Guide" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+          </div>
+          <div data-aos="fade-left" style="padding-left: 2rem;">
+            <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem;">How to Start Investing</h3>
+            <ol style="color: var(--gray); line-height: 2; margin-bottom: 1.5rem;">
+              <li><strong>Complete Registration:</strong> Become a member with $50 one-time fee</li>
+              <li><strong>Verify Your Identity:</strong> Complete KYC verification</li>
+              <li><strong>Fund Your Wallet:</strong> Add funds via bank transfer or mobile money</li>
+              <li><strong>Choose a Plan:</strong> Select from our range of investment options</li>
+              <li><strong>Monitor Growth:</strong> Track your investments through your dashboard</li>
+            </ol>
+            <p style="color: var(--gray); line-height: 1.8;">
+              All investments are protected and regulated. Returns are calculated daily and paid monthly.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Investment FAQs -->
+        <div style="margin-top: 4rem;">
+          <h3 class="section-title left" style="font-size: 1.8rem;">Frequently Asked Questions</h3>
+          
+          <div style="margin-top: 2rem;">
+            <div class="card" style="margin-bottom: 1rem;">
+              <h4 style="color: var(--primary); margin-bottom: 0.5rem;">What is the minimum investment amount?</h4>
+              <p style="color: var(--gray);">Minimum investment starts from $100 for the Starter Plan. Different plans have different minimum requirements.</p>
+            </div>
+            
+            <div class="card" style="margin-bottom: 1rem;">
+              <h4 style="color: var(--primary); margin-bottom: 0.5rem;">How are returns calculated?</h4>
+              <p style="color: var(--gray);">Returns are calculated daily based on your investment amount and the plan's interest rate. Interest is compounded and paid monthly.</p>
+            </div>
+            
+            <div class="card" style="margin-bottom: 1rem;">
+              <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Can I withdraw my investment anytime?</h4>
+              <p style="color: var(--gray);">Yes, you can withdraw your funds at any time. However, some plans may have early withdrawal fees. Check the specific terms of your chosen plan.</p>
+            </div>
+            
+            <div class="card" style="margin-bottom: 1rem;">
+              <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Are my investments safe?</h4>
+              <p style="color: var(--gray);">Yes, we are a registered and regulated financial services company. We use bank-level security and follow strict regulatory guidelines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('pageContent').innerHTML = html;
+  
+  // Load investment plans from Firebase
+  try {
+    const snapshot = await db.collection('investmentPlans').where('active', '==', true).orderBy('minAmount').get();
+    const container = document.getElementById('allPlans');
+    
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="text-center" style="padding: 3rem;">No investment plans available at the moment.</p>';
+    } else {
+      let plansHtml = '';
+      snapshot.forEach(doc => {
+        const plan = doc.data();
+        plansHtml += `
+          <div class="plan-card ${plan.popular ? 'popular' : ''}" data-aos="fade-up">
+            ${plan.popular ? '<div class="popular-badge">🔥 Most Popular</div>' : ''}
+            <div class="plan-header">
+              <i class="fas fa-${plan.icon || 'chart-line'}"></i>
+              <h3>${plan.name || 'Investment Plan'}</h3>
+              <div class="plan-price">${plan.returnRate || 0}% <small>APY</small></div>
+            </div>
+            <div class="plan-body">
+              <ul class="plan-features">
+                <li><i class="fas fa-check"></i> Minimum: $${plan.minAmount?.toLocaleString() || 0}</li>
+                <li><i class="fas fa-check"></i> Maximum: $${plan.maxAmount?.toLocaleString() || 'Unlimited'}</li>
+                <li><i class="fas fa-check"></i> Duration: ${plan.duration || 0} months</li>
+                <li><i class="fas fa-check"></i> ${plan.riskLevel || 'Moderate'} Risk</li>
+                <li><i class="fas fa-check"></i> Daily Interest Accrual</li>
+                <li><i class="fas fa-check"></i> Monthly Payouts</li>
+              </ul>
+            </div>
+            <div class="plan-footer">
+              <button class="btn btn-primary" onclick="${currentUser ? 'openModal(\'investment\')' : 'showAuthModal(\'register\')'}" style="width: 100%;">
+                ${currentUser ? 'Invest Now' : 'Login to Invest'}
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = plansHtml;
+    }
+  } catch (error) {
+    console.log('Error loading investment plans:', error);
+    document.getElementById('allPlans').innerHTML = '<p class="text-center" style="padding: 3rem;">Error loading plans. Please try again later.</p>';
+  }
+}
+
+// ===== DASHBOARD PAGE =====
+async function loadDashboard() {
+  if (!currentUser) {
+    showAuthModal('login');
+    return;
+  }
+  
+  // Refresh user data
+  await loadUserData();
+  
+  const html = `
+    <div class="container">
+      <!-- Welcome Banner -->
+      <div class="welcome-banner" data-aos="fade-up">
+        <div>
+          <h1>Welcome back, ${currentUser.displayName || 'Investor'}! 👋</h1>
+          <p>Your portfolio has grown by 12.5% this month</p>
+        </div>
+        <div class="quick-actions">
+          <button class="btn btn-secondary" onclick="openModal('investment')">
+            <i class="fas fa-plus"></i> New Investment
+          </button>
+          <button class="btn btn-primary" onclick="openModal('deposit')">
+            <i class="fas fa-arrow-down"></i> Deposit
+          </button>
+        </div>
+      </div>
+      
+      <!-- Stats Grid -->
+      <div class="stats-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <div class="stat-info">
+            <h3>$${userData?.balance?.toLocaleString() || '0'}</h3>
+            <p>Total Balance</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="stat-info">
+            <h3>$${userData?.totalInvestments?.toLocaleString() || '0'}</h3>
+            <p>Total Invested</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-percentage"></i>
+          </div>
+          <div class="stat-info">
+            <h3>$${userData?.totalReturns?.toLocaleString() || '0'}</h3>
+            <p>Total Returns</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <h3>${userData?.referralCount || 0}</h3>
+            <p>Referrals</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Portfolio Chart and KYC Status -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;" data-aos="fade-up" data-aos-delay="200">
+        <div class="chart-container">
+          <h3 style="margin-bottom: 1rem;">Portfolio Performance</h3>
+          <canvas id="dashboardChart" style="height: 300px;"></canvas>
+        </div>
+        
+        <div style="background: var(--white); padding: 2rem; border-radius: 1.5rem; box-shadow: var(--shadow);">
+          <h3 style="margin-bottom: 1.5rem;">Account Status</h3>
+          
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div style="width: 60px; height: 60px; border-radius: 50%; background: ${getKYCColor(userData?.kycStatus)}; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-${getKYCIcon(userData?.kycStatus)}" style="color: white; font-size: 1.5rem;"></i>
+            </div>
+            <div>
+              <h4>KYC ${userData?.kycStatus || 'Pending'}</h4>
+              <p style="color: var(--gray);">${getKYCStatus(userData?.kycStatus)}</p>
+            </div>
+          </div>
+          
+          ${userData?.kycStatus !== 'approved' ? `
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;" onclick="openModal('kyc')">
+              Complete KYC Now
+            </button>
+          ` : ''}
+          
+          <div style="margin-top: 2rem;">
+            <h4>Quick Links</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem;">
+              <button class="btn btn-secondary" style="padding: 0.5rem;" onclick="openModal('deposit')">Deposit</button>
+              <button class="btn btn-secondary" style="padding: 0.5rem;" onclick="openModal('withdraw')">Withdraw</button>
+              <button class="btn btn-secondary" style="padding: 0.5rem;" onclick="showPage('investments')">Invest</button>
+              <button class="btn btn-secondary" style="padding: 0.5rem;" onclick="showPage('referrals')">Refer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recent Transactions -->
+      <div class="recent-transactions" data-aos="fade-up" data-aos-delay="300">
+        <h3 style="margin-bottom: 1.5rem;">Recent Transactions</h3>
+        <div class="transactions-list" id="recentTransactions"></div>
+      </div>
+      
+      <!-- Active Investments -->
+      <div style="margin-top: 3rem;" data-aos="fade-up" data-aos-delay="400">
+        <h3 style="margin-bottom: 1.5rem;">Your Active Investments</h3>
+        <div class="grid-3" id="activeInvestments"></div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('pageContent').innerHTML = html;
+  
+  // Load transactions
+  await loadRecentTransactions();
+  
+  // Load active investments
+  await loadActiveInvestments();
+  
+  // Create chart
+  createDashboardChart();
+}
+
+// ===== COMMUNITY PAGE =====
+async function loadCommunity() {
+  if (!currentUser) {
+    showAuthModal('login');
+    return;
+  }
+  
+  const html = `
+    <div class="container">
+      <h1 class="section-title" data-aos="fade-up">Community Forum</h1>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Connect with fellow investors, share experiences, and learn together</p>
+      
+      <!-- Create Post Section -->
+      <div class="create-post" data-aos="fade-up" data-aos-delay="200">
+        <h3 style="margin-bottom: 1rem;">Share Your Thoughts</h3>
+        <textarea id="postContent" ="What would you like to share with the community?"></textarea>
+        <div class="create-post-footer">
+          <div>
+            <button class="btn btn-secondary" onclick="document.getElementById('postImage').click()">
+              <i class="fas fa-image"></i> Add Image
+            </button>
+            <input type="file" id="postImage" accept="image/*" style="display: none;">
+          </div>
+          <button class="btn btn-primary" onclick="createPost()">
+            <i class="fas fa-paper-plane"></i> Post
+          </button>
+        </div>
+      </div>
+      
+      <!-- Community Guidelines -->
+      <div class="card" style="margin-bottom: 2rem; background: var(--light);" data-aos="fade-up" data-aos-delay="300">
+        <h4 style="color: var(--primary); margin-bottom: 1rem;">Community Guidelines</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div><i class="fas fa-heart" style="color: var(--secondary);"></i> Be respectful</div>
+          <div><i class="fas fa-ban" style="color: var(--secondary);"></i> No spam</div>
+          <div><i class="fas fa-lock" style="color: var(--secondary);"></i> Protect privacy</div>
+          <div><i class="fas fa-handshake" style="color: var(--secondary);"></i> Help others</div>
+        </div>
+      </div>
+      
+      <!-- Posts Feed -->
+      <div class="posts-feed" id="postsFeed" data-aos="fade-up" data-aos-delay="400"></div>
+    </div>
+  `;
+  
+  document.getElementById('pageContent').innerHTML = html;
+  
+  // Load posts
+  await loadPosts();
+}
+
+// ===== REVIEWS PAGE =====
+async function loadReviews() {
+  const html = `
+    <div class="container">
+      <div class="reviews-header">
+        <h1 class="section-title" data-aos="fade-up">Member Reviews</h1>
+        ${currentUser ? `
+          <button class="btn btn-primary" onclick="openReviewModal()" data-aos="fade-left">
+            <i class="fas fa-star"></i> Write a Review
+          </button>
+        ` : ''}
+      </div>
+      
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">See what our community members are saying about their experience with Seedwel</p>
+      
+      <!-- Rating Summary -->
+      <div class="grid-2" style="margin: 3rem 0;" data-aos="fade-up" data-aos-delay="200">
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 4rem; color: var(--secondary);">4.8</div>
+          <div style="font-size: 1.5rem; color: var(--secondary); margin-bottom: 0.5rem;">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+          </div>
+          <p style="color: var(--gray);">Based on 1,200+ reviews</p>
+        </div>
+        
+        <div class="card">
+          <h4 style="margin-bottom: 1rem;">Rating Breakdown</h4>
+          ${[5,4,3,2,1].map(star => `
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+              <span style="min-width: 60px;">${star} stars</span>
+              <div style="flex: 1; height: 8px; background: var(--light-60); border-radius: 4px;">
+                <div style="width: ${star === 5 ? '70%' : star === 4 ? '20%' : star === 3 ? '7%' : '2%'}%; height: 100%; background: var(--secondary); border-radius: 4px;"></div>
+              </div>
+              <span>${star === 5 ? '70%' : star === 4 ? '20%' : star === 3 ? '7%' : '3%'}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      
+      <!-- Reviews Grid -->
+      <div class="reviews-grid" id="allReviews" data-aos="fade-up" data-aos-delay="300"></div>
+    </div>
+  `;
+  
+  document.getElementById('pageContent').innerHTML = html;
+  
+  // Load reviews
+  await loadAllReviews();
+}
+
+// ===== ABOUT PAGE =====
+async function loadAbout() {
+  const html = `
+    <div class="container">
+      <h1 class="section-title" data-aos="fade-up">About Seedwel Investment Limited</h1>
+      
+      <!-- Company Overview -->
+      <div class="grid-2" style="margin: 4rem 0; align-items: center;" data-aos="fade-up">
+        <div data-aos="fade-right">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Our Team" style="width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-2xl);">
+        </div>
+        <div data-aos="fade-left" style="padding-left: 2rem;">
+          <h2 class="section-title left">Our Story</h2>
+          <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">
+            Founded in 2016, Seedwel Investment Limited began with a simple but powerful vision: to make quality financial services accessible to everyone, regardless of their background or location. What started as a small community initiative has grown into a trusted financial partner serving thousands of members across Zambia and Eswatini.
+          </p>
+          <p style="color: var(--gray); line-height: 1.8;">
+            Today, we offer a comprehensive range of financial solutions including investments, savings programs, insurance cover, loan services, and educational scholarships. Our commitment to transparency, security, and community development remains at the heart of everything we do.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Mission & Vision -->
+      <div class="grid-2" style="margin: 4rem 0; gap: 3rem;" data-aos="fade-up">
+        <div class="card" style="text-align: center;">
+          <div class="card-icon" style="margin: 0 auto 1.5rem;">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Mission</h3>
+          <p style="color: var(--gray); line-height: 1.8;">
+            To empower individuals and communities with innovative financial solutions that promote sustainable growth, financial independence, and economic prosperity across Africa.
+          </p>
+        </div>
+        
+        <div class="card" style="text-align: center;">
+          <div class="card-icon" style="margin: 0 auto 1.5rem;">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Vision</h3>
+          <p style="color: var(--gray); line-height: 1.8;">
+            To become Africa's most trusted and accessible financial partner, creating lasting value and opportunities for millions of individuals, families, and communities.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Core Values -->
+      <h2 class="section-title" data-aos="fade-up" style="margin-top: 4rem;">Our Core Values</h2>
+      <div class="grid-4" style="margin: 3rem 0;" data-aos="fade-up">
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-handshake" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+          <h4>Integrity</h4>
+          <p style="color: var(--gray);">We conduct business with the highest ethical standards</p>
+        </div>
+        
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-eye" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+          <h4>Transparency</h4>
+          <p style="color: var(--gray);">Clear communication about all products and services</p>
+        </div>
+        
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+          <h4>Innovation</h4>
+          <p style="color: var(--gray);">Continuously improving our solutions</p>
+        </div>
+        
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-users" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+          <h4>Community</h4>
+          <p style="color: var(--gray);">Putting our members first in every decision</p>
+        </div>
+      </div>
+      
+      <!-- Leadership Team -->
+      <h2 class="section-title" data-aos="fade-up" style="margin-top: 4rem;">Our Leadership Team</h2>
+      <div class="grid-3" style="margin: 3rem 0;" data-aos="fade-up">
+        <div class="card" style="text-align: center;">
+          <img src="https://i.ibb.co/RTbNh1hB/founder-2.jpg" alt="Founder" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem; border: 4px solid var(--secondary);">
+          <h3 style="color: var(--primary);">Mr. Seedwel Kayaretu Masuku</h3>
+          <p style="color: var(--secondary); font-weight: 600;">Founder & CEO</p>
+          <p style="color: var(--gray);">15+ years in financial services</p>
+        </div>
+        
+        <div class="card" style="text-align: center;">
+          <div style="width: 200px; height: 200px; border-radius: 50%; background: var(--secondary-gradient); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--primary);">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3 style="color: var(--primary);">Mrs. Grace Banda</h3>
+          <p style="color: var(--secondary); font-weight: 600;">Chief Financial Officer</p>
+          <p style="color: var(--gray);">12+ years in financial management</p>
+        </div>
+        
+        <div class="card" style="text-align: center;">
+          <div style="width: 200px; height: 200px; border-radius: 50%; background: var(--secondary-gradient); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--primary);">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3 style="color: var(--primary);">Mr. Michael Phiri</h3>
+          <p style="color: var(--secondary); font-weight: 600;">Chief Operations Officer</p>
+          <p style="color: var(--gray);">10+ years in operations</p>
+        </div>
+      </div>
+      
+      <!-- Company Statistics -->
+      <div class="stats-section" style="margin: 4rem 0;">
+        <div class="container">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number">2016</div>
+              <div class="stat-label">Founded</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">12K+</div>
+              <div class="stat-label">Members</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">$2.5M</div>
+              <div class="stat-label">Investments</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">5</div>
+              <div class="stat-label">Countries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('pageContent').innerHTML = html;
+}
+
+// ===== CONTACT PAGE =====
+async function loadContact() {
+  const html = `
+    <div class="container">
+      <h1 class="section-title" data-aos="fade-up">Contact Us</h1>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">We're here to help 24/7. Reach out to us through any of these channels</p>
+      
+      <div class="grid-2" style="margin: 4rem 0; gap: 3rem;" data-aos="fade-up">
+        <!-- Contact Information -->
+        <div>
+          <div class="card" style="margin-bottom: 2rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Get in Touch</h3>
+            
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="width: 50px; height: 50px; background: var(--secondary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-map-marker-alt" style="color: var(--primary); font-size: 1.2rem;"></i>
+              </div>
+              <div>
+                <h4 style="color: var(--primary);">Zambia Office</h4>
+                <p style="color: var(--gray);">Plot 2374, Cairo Road, Lusaka, Zambia</p>
+                <p style="color: var(--gray);"><strong>Phone:</strong> +260 973 028 342</p>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="width: 50px; height: 50px; background: var(--secondary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-map-marker-alt" style="color: var(--primary); font-size: 1.2rem;"></i>
+              </div>
+              <div>
+                <h4 style="color: var(--primary);">Eswatini Office</h4>
+                <p style="color: var(--gray);">Suite 5, Mbabane Plaza, Mbabane, Eswatini</p>
+                <p style="color: var(--gray);"><strong>Phone:</strong> +268 760 000 000</p>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="width: 50px; height: 50px; background: var(--secondary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-envelope" style="color: var(--primary); font-size: 1.2rem;"></i>
+              </div>
+              <div>
+                <h4 style="color: var(--primary);">Email</h4>
+                <p style="color: var(--gray);">info@seedwelinvest.com</p>
+                <p style="color: var(--gray);">support@seedwelinvest.com</p>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="width: 50px; height: 50px; background: var(--secondary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-clock" style="color: var(--primary); font-size: 1.2rem;"></i>
+              </div>
+              <div>
+                <h4 style="color: var(--primary);">Business Hours</h4>
+                <p style="color: var(--gray);">Monday - Friday: 8:00 AM - 6:00 PM</p>
+                <p style="color: var(--gray);">Saturday: 9:00 AM - 1:00 PM</p>
+                <p style="color: var(--gray);">Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Follow Us</h3>
+            <div style="display: flex; gap: 1rem;">
+              <a href="#" style="width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); transition: var(--transition);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" style="width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); transition: var(--transition);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-twitter"></i></a>
+              <a href="#" style="width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); transition: var(--transition);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" style="width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); transition: var(--transition);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-instagram"></i></a>
+              <a href="#" style="width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); transition: var(--transition);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="card">
+          <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Send Us a Message</h3>
+          
+          <form onsubmit="sendContactMessage(event)">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" id="contactName" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="contactEmail" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" id="contactSubject" placeholder="What is this about?" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Message</label>
+              <textarea id="contactMessage" rows="5" placeholder="How can we help you?" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Map -->
+      <div style="margin-top: 4rem;" data-aos="fade-up">
+        <h3 class="section-title">Our Location</h3>
+        <div id="contactMap" style="height: 400px; border-radius: var(--radius-2xl); margin-top: 2rem;"></div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('pageContent').innerHTML = html;
+  
+  // Initialize map
+  setTimeout(() => {
+    const map = L.map('contactMap').setView([-15.3875, 28.3228], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    
+    // Add marker for Zambia office
+    L.marker([-15.3875, 28.3228]).addTo(map)
+      .bindPopup('Seedwel Investment Limited - Zambia Office<br>Plot 2374, Cairo Road, Lusaka')
+      .openPopup();
+  }, 100);
+}
+
+// Add contact form submission function
+async function sendContactMessage(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('contactName').value;
+  const email = document.getElementById('contactEmail').value;
+  const subject = document.getElementById('contactSubject').value;
+  const message = document.getElementById('contactMessage').value;
+  
+  try {
+    showLoader();
+    
+    // Save to Firebase
+    await db.collection('contactMessages').add({
+      name,
+      email,
+      subject,
+      message,
+      status: 'unread',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    
+    // Send email via EmailJS
+    emailjs.send('service_id', 'template_id', {
+      from_name: name,
+      from_email: email,
+      subject: subject,
+      message: message,
+      to_email: 'info@seedwelinvest.com'
+    });
+    
+    showToast('Message sent successfully! We will respond within 24 hours.', 'success');
+    event.target.reset();
+  } catch (error) {
+    showToast(error.message, 'error');
+  } finally {
+    hideLoader();
+  }
+}
+  
+  // ===== INIT =====
+  window.onload = () => {
+    document.querySelector('.nav-menu a[onclick*="home"]')?.classList.add('active');
+    showPage('home');
+  };
+  
+  // ===== DROPDOWN TOGGLE =====
+  document.querySelector('.user-menu')?.addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('dropdownMenu').classList.toggle('show');
+  });
+  
+  document.addEventListener('click', () => {
+    document.getElementById('dropdownMenu').classList.remove('show');
+  });
+  
+  // ===== CARD GLOW EFFECT =====
+  document.addEventListener('mousemove', e => {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--x', `${x}%`);
+      card.style.setProperty('--y', `${y}%`);
+    });
+  });
+</script>
+</body>
+</html>
