@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Item · Seedwel Global Marketplace</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0d2b4e;
+            --primary-light: #1a4a7a;
+            --primary-lighter: #2a6a9e;
+            --accent: #e67e22;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --dark: #1a2e4a;
+            --gray: #5f8eb0;
+            --light-gray: #a0c0e0;
+            --bg-light: #f4f9fe;
+            --white: #ffffff;
+            --border-light: #d9e6f2;
+            --shadow-sm: 0 4px 12px rgba(13, 43, 78, 0.06);
+            --shadow-md: 0 8px 24px rgba(13, 43, 78, 0.1);
+            --shadow-lg: 0 16px 40px rgba(13, 43, 78, 0.14);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .marketplace-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* —— COMPACT HEADER —— */
+        .compact-header {
+            background: linear-gradient(135deg, #0d2b4e 0%, #1a4a7a 100%);
+            padding: 0.8rem 2rem;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .menu-icon-wrapper {
+            width: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .menu-icon:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .menu-icon span {
+            width: 20px;
+            height: 2px;
+            background: white;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .menu-icon span:nth-child(2) {
+            width: 14px;
+            margin-left: auto;
+        }
+
+        .menu-icon:hover span:nth-child(2) {
+            width: 20px;
+        }
+
+        .logo-centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-image {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.05);
+        }
+
+        .user-icon-wrapper {
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .user-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 1rem;
+        }
+
+        .user-icon:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .search-row {
+            max-width: 700px;
+            margin: 0.8rem auto 0;
+            padding-bottom: 0.2rem;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 50px;
+            padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .search-container i {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .search-container input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+        }
+
+        .search-container input::placeholder {
+            color: var(--light-gray);
+            font-weight: 300;
+        }
+
+        .search-container button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-lighter) 100%);
+            color: white;
+            border: none;
+            padding: 0.55rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .search-container button:hover {
+            background: linear-gradient(135deg, #0a1f35 0%, var(--primary-light) 100%);
+        }
+
+        /* Dropdowns */
+        .menu-dropdown, .user-dropdown {
+            position: absolute;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            min-width: 220px;
+            display: none;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .menu-dropdown {
+            top: 60px;
+            left: 20px;
+        }
+
+        .user-dropdown {
+            top: 60px;
+            right: 20px;
+        }
+
+        .menu-dropdown.show, .user-dropdown.show {
+            display: block;
+        }
+
+        .menu-dropdown a, .user-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .menu-dropdown a:last-child, .user-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .menu-dropdown a:hover, .user-dropdown a:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .menu-dropdown a i, .user-dropdown a i {
+            width: 20px;
+            color: var(--gray);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border-light);
+            margin: 0.5rem 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* —— MAIN CONTENT —— */
+        .main-content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .page-title i {
+            color: var(--primary-lighter);
+            margin-right: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label i {
+            color: var(--primary-lighter);
+        }
+
+        .required-badge {
+            background: var(--danger);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Image Upload */
+        .upload-area {
+            border: 2.5px dashed var(--border-light);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            background: #fafdff;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-lighter);
+            background: #f0f7ff;
+        }
+
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: #e4eef8;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-lighter);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .cloudinary-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-lighter));
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .image-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .preview-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--border-light);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-remove {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 26px;
+            height: 26px;
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            transition: var(--transition);
+        }
+
+        .preview-remove:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .preview-main-badge {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            background: rgba(13, 43, 78, 0.9);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .image-limit-warning {
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .image-limit-warning.show {
+            display: block;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-card { padding: 1.5rem; }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-label i {
+            color: var(--gray);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            padding: 0.8rem 1.2rem;
+            border: 1.5px solid var(--border-light);
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--dark);
+            background: white;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--primary-lighter);
+            box-shadow: 0 0 0 3px rgba(42, 106, 158, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .input-with-prefix {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid var(--border-light);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .input-prefix {
+            background: #e4eef8;
+            padding: 0.8rem 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            border-right: 1.5px solid var(--border-light);
+        }
+
+        .input-with-prefix input {
+            border: none;
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+        }
+
+        /* Checkbox & Radio */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0.5rem 0;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-option input {
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            accent-color: var(--primary);
+        }
+
+        /* Progress Bar */
+        .upload-progress {
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .progress-bar-container {
+            background: #e1ecf5;
+            border-radius: 40px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-lighter));
+            border-radius: 40px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1.5px solid var(--border-light);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-lighter) 100%);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 16px rgba(13, 43, 78, 0.15);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #0a1f35 0%, var(--primary-light) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(13, 43, 78, 0.2);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--gray);
+            border: 1.5px solid var(--border-light);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-light);
+            border-color: var(--light-gray);
+            color: var(--primary);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 9999;
+            font-size: 0.85rem;
+        }
+
+        .toast.show { transform: translateX(0); }
+        .toast.success { background: linear-gradient(135deg, var(--primary), var(--primary-lighter)); }
+        .toast.error { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+    </style>
+</head>
+<body>
+    <div class="marketplace-container">
+        <!-- COMPACT HEADER -->
+        <header class="compact-header">
+            <div class="header-row">
+                <div class="menu-icon-wrapper">
+                    <div class="menu-icon" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="logo-centered">
+                    <img src="https://i.ibb.co/svxj52ny/seedwel.png" alt="Seedwel" class="logo-image">
+                </div>
+
+                <div class="user-icon-wrapper">
+                    <div class="user-icon" id="userIcon" onclick="toggleUserMenu()">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search listings..." id="headerSearch">
+                    <button onclick="performHeaderSearch()">
+                        Search <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-dropdown" id="menuDropdown">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="browse.html"><i class="fas fa-search"></i> Browse</a>
+                <a href="create-listing.html"><i class="fas fa-plus-circle"></i> Sell Item</a>
+                <a href="messages.html"><i class="fas fa-comments"></i> Messages</a>
+                <a href="#"><i class="fas fa-tag"></i> Deals</a>
+                <a href="#"><i class="fas fa-info-circle"></i> Help Center</a>
+            </div>
+
+            <div class="user-dropdown" id="userDropdown">
+                <div id="userDropdownContent">
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="register.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="overlay" id="overlay" onclick="closeAllDropdowns()"></div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content-wrapper">
+            <h1 class="page-title">
+                <i class="fas fa-tag"></i> Create New Listing
+            </h1>
+            <p class="page-subtitle">
+                <i class="fas fa-info-circle"></i>
+                Your listing will be visible to buyers worldwide · Powered by Cloudinary CDN
+            </p>
+
+            <!-- FORM CARD -->
+            <div class="form-card">
+                <form id="listingForm">
+                    <!-- IMAGE UPLOAD SECTION -->
+                    <div class="form-section">
+                        <div class="section-label">
+                            <i class="fas fa-camera"></i>
+                            Listing Images
+                            <span class="required-badge">Required</span>
+                        </div>
+                        
+                        <div class="image-upload-container">
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="upload-text">Click or drag images to upload</div>
+                                <div class="upload-hint">PNG, JPG, WEBP · Max 5 images · Up to 10MB each</div>
+                                <div class="cloudinary-badge">
+                                    <i class="fas fa-bolt"></i> Powered by Cloudinary · Global CDN
+                                </div>
+                            </div>
+                            <input type="file" id="imageInput" accept="image/png,image/jpeg,image/jpg,image/webp" multiple hidden>
+                            
+                            <div class="image-preview-grid" id="imagePreviewGrid"></div>
+                            <div class="image-limit-warning" id="imageLimitWarning">
+                                <i class="fas fa-exclamation-triangle"></i> Maximum 5 images allowed
+                            </div>
+                        </div>
+
+                        <div class="upload-progress" id="uploadProgress">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="progressFill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="progressStatus">Uploading...</span>
+                                <span id="progressPercent">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LISTING DETAILS -->
+                    <div class="form-section">
+                        <div class="section-label">
+                            <i class="fas fa-info-circle"></i>
+                            Listing Details
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label class="form-label">
+                                    <i class="fas fa-heading"></i> Title <span style="color: var(--danger);">*</span>
+                                </label>
+                                <input type="text" class="form-input" id="title" placeholder="e.g., iPhone 15 Pro Max - Brand New" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-dollar-sign"></i> Price <span style="color: var(--danger);">*</span>
+                                </label>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" id="price" placeholder="0.00" step="0.01" min="0" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-coins"></i> Currency
+                                </label>
+                                <select class="form-select" id="currency">
+                                    <option value="USD">USD ($)</option>
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="GBP">GBP (£)</option>
+                                    <option value="ZMW">ZMW (ZK)</option>
+                                    <option value="NGN">NGN (₦)</option>
+                                    <option value="ZAR">ZAR (R)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-folder"></i> Category <span style="color: var(--danger);">*</span>
+                                </label>
+                                <select class="form-select" id="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="electronics">📱 Electronics</option>
+                                    <option value="fashion">👕 Fashion</option>
+                                    <option value="property">🏠 Property</option>
+                                    <option value="vehicles">🚗 Vehicles</option>
+                                    <option value="services">🔧 Services</option>
+                                    <option value="other">📦 Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-tags"></i> Listing Type <span style="color: var(--danger);">*</span>
+                                </label>
+                                <select class="form-select" id="type" required>
+                                    <option value="sell">🛍️ For Sale</option>
+                                    <option value="rent">🏠 For Rent</option>
+                                    <option value="service">💼 Service</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-map-marker-alt"></i> Location
+                                </label>
+                                <select class="form-select" id="country">
+                                    <option value="Global">🌐 Global (Ships Worldwide)</option>
+                                    <option value="US">🇺🇸 United States</option>
+                                    <option value="GB">🇬🇧 United Kingdom</option>
+                                    <option value="ZM">🇿🇲 Zambia</option>
+                                    <option value="NG">🇳🇬 Nigeria</option>
+                                    <option value="ZA">🇿🇦 South Africa</option>
+                                    <option value="KE">🇰🇪 Kenya</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-city"></i> City
+                                </label>
+                                <input type="text" class="form-input" id="city" placeholder="e.g., New York, London">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label class="form-label">
+                                    <i class="fas fa-align-left"></i> Description <span style="color: var(--danger);">*</span>
+                                </label>
+                                <textarea class="form-textarea" id="description" placeholder="Describe your item in detail... Include condition, specifications, shipping options, etc." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SHIPPING SECTION -->
+                    <div class="form-section">
+                        <div class="section-label">
+                            <i class="fas fa-truck"></i>
+                            Shipping & Delivery
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="shippingAvailable" checked>
+                                <span>📦 Shipping Available</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="localPickup">
+                                <span>🏪 Local Pickup Available</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="internationalShipping">
+                                <span>🌍 International Shipping</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CONTACT PREFERENCES -->
+                    <div class="form-section">
+                        <div class="section-label">
+                            <i class="fas fa-envelope"></i>
+                            Contact Preferences
+                        </div>
+                        
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="contactMethod" value="chat" checked>
+                                <span>💬 In-app Chat Only</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contactMethod" value="email">
+                                <span>📧 Email</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contactMethod" value="both">
+                                <span>🔄 Both</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- FORM ACTIONS -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="window.location.href='browse.html'">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            <i class="fas fa-globe"></i> Publish Listing
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Message</span>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA-BpRy-RVc2rqIG6uiRu_XrGEu1ZGnQwU",
+            authDomain: "seedwel-investment-limited.firebaseapp.com",
+            databaseURL: "https://seedwel-investment-limited-default-rtdb.firebaseio.com",
+            projectId: "seedwel-investment-limited",
+            storageBucket: "seedwel-investment-limited.firebasestorage.app",
+            messagingSenderId: "197778268619",
+            appId: "1:197778268619:web:92f29d88fa5a22dbfa964e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const CLOUDINARY_CONFIG = {
+            cloudName: 'seedwel',
+            uploadPreset: 'Sell_products',
+            folder: 'seedwel-listings'
+        };
+
+        let currentUser = null;
+        let selectedFiles = [];
+        const MAX_IMAGES = 5;
+        const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+        // Auth State
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            updateUserMenu(user);
+            
+            if (!user) {
+                showToast('Please login to create a listing', 'error');
+                setTimeout(() => window.location.href = 'login.html', 2000);
+            }
+        });
+
+        function updateUserMenu(user) {
+            const dropdownContent = document.getElementById('userDropdownContent');
+            const userIcon = document.getElementById('userIcon');
+            
+            if (user) {
+                const displayName = user.displayName || user.email?.split('@')[0] || 'User';
+                userIcon.innerHTML = `<span style="font-weight:600;">${displayName.charAt(0).toUpperCase()}</span>`;
+                
+                dropdownContent.innerHTML = `
+                    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                    <a href="messages.html"><i class="fas fa-comments"></i> Messages</a>
+                    <a href="create-listing.html"><i class="fas fa-plus-circle"></i> Sell Item</a>
+                    <div class="divider"></div>
+                    <a href="#" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                `;
+            } else {
+                userIcon.innerHTML = `<i class="fas fa-user"></i>`;
+                dropdownContent.innerHTML = `
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="register.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                `;
+            }
+        }
+
+        // Dropdown Functions
+        window.toggleMenu = () => {
+            document.getElementById('userDropdown').classList.remove('show');
+            document.getElementById('menuDropdown').classList.toggle('show');
+            document.getElementById('overlay').classList.toggle('show');
+        };
+
+        window.toggleUserMenu = () => {
+            document.getElementById('menuDropdown').classList.remove('show');
+            document.getElementById('userDropdown').classList.toggle('show');
+            document.getElementById('overlay').classList.toggle('show');
+        };
+
+        window.closeAllDropdowns = () => {
+            document.getElementById('menuDropdown').classList.remove('show');
+            document.getElementById('userDropdown').classList.remove('show');
+            document.getElementById('overlay').classList.remove('show');
+        };
+
+        window.handleLogout = async () => {
+            try {
+                await signOut(auth);
+                showToast('Logged out successfully', 'success');
+                setTimeout(() => window.location.reload(), 1000);
+            } catch (error) {
+                showToast('Logout failed', 'error');
+            }
+        };
+
+        window.performHeaderSearch = () => {
+            const searchTerm = document.getElementById('headerSearch').value;
+            if (searchTerm) {
+                window.location.href = `browse.html?search=${encodeURIComponent(searchTerm)}`;
+            }
+        };
+
+        // Image Upload
+        const uploadArea = document.getElementById('uploadArea');
+        const imageInput = document.getElementById('imageInput');
+        const previewGrid = document.getElementById('imagePreviewGrid');
+        const imageLimitWarning = document.getElementById('imageLimitWarning');
+
+        uploadArea.addEventListener('click', () => imageInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+            handleFiles(files);
+        });
+
+        imageInput.addEventListener('change', (e) => {
+            handleFiles(Array.from(e.target.files));
+        });
+
+        function handleFiles(files) {
+            const imageFiles = files.filter(f => f.type.startsWith('image/'));
+            
+            if (selectedFiles.length + imageFiles.length > MAX_IMAGES) {
+                imageLimitWarning.classList.add('show');
+                return;
+            }
+            
+            imageLimitWarning.classList.remove('show');
+            
+            imageFiles.forEach(file => {
+                if (file.size > MAX_FILE_SIZE) {
+                    showToast(`${file.name} exceeds 10MB limit`, 'error');
+                    return;
+                }
+                selectedFiles.push(file);
+            });
+            
+            renderPreviews();
+        }
+
+        function renderPreviews() {
+            previewGrid.innerHTML = '';
+            
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const preview = document.createElement('div');
+                    preview.className = 'preview-item';
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview ${index + 1}">
+                        <div class="preview-remove" onclick="removeImage(${index})">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        ${index === 0 ? '<span class="preview-main-badge">Main</span>' : ''}
+                    `;
+                    previewGrid.appendChild(preview);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        window.removeImage = (index) => {
+            selectedFiles.splice(index, 1);
+            renderPreviews();
+            imageLimitWarning.classList.remove('show');
+        };
+
+        // Cloudinary Upload
+        async function uploadToCloudinary(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
+            formData.append('folder', CLOUDINARY_CONFIG.folder);
+
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/image/upload`,
+                { method: 'POST', body: formData }
+            );
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error?.message || 'Upload failed');
+            }
+            
+            return {
+                url: data.secure_url,
+                publicId: data.public_id,
+                width: data.width,
+                height: data.height
+            };
+        }
+
+        async function uploadAllImages() {
+            const progressBar = document.getElementById('uploadProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressStatus = document.getElementById('progressStatus');
+            const progressPercent = document.getElementById('progressPercent');
+            
+            progressBar.style.display = 'block';
+            
+            const uploadedImages = [];
+            
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const percent = Math.round((i / selectedFiles.length) * 100);
+                
+                progressFill.style.width = `${percent}%`;
+                progressPercent.textContent = `${percent}%`;
+                progressStatus.textContent = `Uploading image ${i + 1} of ${selectedFiles.length}...`;
+                
+                try {
+                    const result = await uploadToCloudinary(selectedFiles[i]);
+                    uploadedImages.push(result);
+                } catch (error) {
+                    throw new Error(`Failed to upload: ${error.message}`);
+                }
+            }
+            
+            progressFill.style.width = '100%';
+            progressPercent.textContent = '100%';
+            progressStatus.textContent = '✓ All images uploaded!';
+            
+            setTimeout(() => {
+                progressBar.style.display = 'none';
+            }, 1500);
+            
+            return uploadedImages;
+        }
+
+        // Form Submission
+        document.getElementById('listingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showToast('Please login to create a listing', 'error');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            if (selectedFiles.length === 0) {
+                showToast('Please upload at least one image', 'error');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+            
+            try {
+                const uploadedImages = await uploadAllImages();
+                
+                const listingData = {
+                    title: document.getElementById('title').value,
+                    price: parseFloat(document.getElementById('price').value),
+                    currency: document.getElementById('currency').value,
+                    category: document.getElementById('category').value,
+                    type: document.getElementById('type').value,
+                    country: document.getElementById('country').value,
+                    city: document.getElementById('city').value,
+                    description: document.getElementById('description').value,
+                    images: uploadedImages.map(img => img.url),
+                    imageDetails: uploadedImages,
+                    shippingAvailable: document.getElementById('shippingAvailable').checked,
+                    localPickup: document.getElementById('localPickup').checked,
+                    internationalShipping: document.getElementById('internationalShipping').checked,
+                    contactMethod: document.querySelector('input[name="contactMethod"]:checked').value,
+                    sellerId: currentUser.uid,
+                    sellerName: currentUser.displayName || currentUser.email?.split('@')[0],
+                    sellerEmail: currentUser.email,
+                    status: 'active',
+                    views: 0,
+                    favorites: 0,
+                    createdAt: serverTimestamp()
+                };
+                
+                const docRef = await addDoc(collection(db, 'listings'), listingData);
+                
+                showToast('🎉 Listing published successfully!', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = `listing-detail.html?id=${docRef.id}`;
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Failed to publish listing: ' + error.message, 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-globe"></i> Publish Listing';
+            }
+        });
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const icon = toast.querySelector('i');
+            
+            toast.className = `toast ${type}`;
+            toastMessage.textContent = message;
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        document.getElementById('headerSearch')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performHeaderSearch();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAllDropdowns();
+        });
+
+        console.log('🚀 Seedwel Create Listing - Ready!');
+    </script>
+</body>
+</html>

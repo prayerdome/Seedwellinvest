@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register · Seedwel Global Marketplace</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f4f9fe 0%, #e8f2fa 100%);
+            color: #1a2e4a;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* —— AUTH CARD —— */
+        .auth-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2.8rem 2.5rem;
+            box-shadow: 0 30px 60px rgba(30, 70, 110, 0.12);
+            border: 1px solid #d9e6f2;
+        }
+
+        /* —— BRAND —— */
+        .brand-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 2rem;
+        }
+
+        .brand-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #1a4a7a 0%, #2a6a9e 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 20px rgba(26, 74, 122, 0.2);
+        }
+
+        .brand-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #0d2b4e;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-name span {
+            font-family: 'Cormorant', serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: 1.6rem;
+            color: #2a6a9e;
+            margin-left: 4px;
+        }
+
+        /* —— HEADER —— */
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: #0d2b4e;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-subtitle {
+            color: #7aadcc;
+            font-size: 0.95rem;
+        }
+
+        /* —— FORM —— */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 500px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #1a3a5c;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1.2rem;
+            color: #a0c0e0;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1.2rem 0.9rem 2.8rem;
+            border: 1.5px solid #d9e6f2;
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #1a2e4a;
+            background: white;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #3b7eb0;
+            box-shadow: 0 0 0 4px rgba(59, 126, 176, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #b0cee6;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1.2rem;
+            color: #a0c0e0;
+            cursor: pointer;
+            transition: color 0.15s;
+            font-size: 0.9rem;
+        }
+
+        .password-toggle:hover {
+            color: #5f8eb0;
+        }
+
+        /* —— PASSWORD STRENGTH —— */
+        .password-strength {
+            margin-top: 6px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e1ecf5;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background 0.3s;
+            border-radius: 10px;
+        }
+
+        .strength-fill.weak { width: 33%; background: #e74c3c; }
+        .strength-fill.medium { width: 66%; background: #f39c12; }
+        .strength-fill.strong { width: 100%; background: #27ae60; }
+
+        .strength-text {
+            font-size: 0.7rem;
+            color: #7aadcc;
+        }
+
+        /* —— TERMS CHECKBOX —— */
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 0.5rem 0;
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1a4a7a;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .terms-checkbox label {
+            font-size: 0.85rem;
+            color: #5f8eb0;
+            cursor: pointer;
+        }
+
+        .terms-checkbox a {
+            color: #1a4a7a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        /* —— BUTTONS —— */
+        .btn-primary {
+            background: linear-gradient(135deg, #1a4a7a 0%, #2a6a9e 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(26, 74, 122, 0.2);
+            width: 100%;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #0d2b4e 0%, #1a4a7a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(26, 74, 122, 0.25);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-google {
+            background: white;
+            color: #3a5a7a;
+            border: 1.5px solid #d9e6f2;
+            padding: 0.9rem;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .btn-google:hover {
+            background: #f8fcff;
+            border-color: #b0cee6;
+        }
+
+        .btn-google i {
+            color: #4285f4;
+        }
+
+        /* —— DIVIDER —— */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #b0cee6;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1.5px solid #e1ecf5;
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+
+        /* —— FOOTER —— */
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #7aadcc;
+            font-size: 0.9rem;
+        }
+
+        .auth-footer a {
+            color: #1a4a7a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+
+        .auth-footer a:hover {
+            color: #0d2b4e;
+            text-decoration: underline;
+        }
+
+        /* —— ERROR MESSAGE —— */
+        .error-message {
+            background: #fdeded;
+            color: #e74c3c;
+            padding: 0.9rem 1.2rem;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            border: 1.5px solid #f5c6cb;
+            margin-bottom: 1rem;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        /* —— SUCCESS MESSAGE —— */
+        .success-message {
+            background: #d5f5e3;
+            color: #27ae60;
+            padding: 0.9rem 1.2rem;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            border: 1.5px solid #a9dfbf;
+            margin-bottom: 1rem;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        /* —— BACK LINK —— */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #7aadcc;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.15s;
+        }
+
+        .back-link:hover {
+            color: #1a4a7a;
+        }
+
+        /* —— TOAST —— */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1a2e4a;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 50px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 9999;
+        }
+
+        .toast.show { transform: translateX(0); }
+        .toast.success { background: linear-gradient(135deg, #1a4a7a, #2a6a9e); }
+        .toast.error { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+
+        /* —— LOADING SPINNER —— */
+        .fa-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* —— RESPONSIVE —— */
+        @media (max-width: 500px) {
+            body { padding: 1rem; align-items: flex-start; }
+            .auth-card { padding: 2rem 1.5rem; }
+            .brand-name { font-size: 1.8rem; }
+            .brand-name span { font-size: 1.3rem; }
+            .auth-title { font-size: 1.6rem; }
+        }
+
+        /* —— VERIFICATION NOTICE —— */
+        .verification-notice {
+            background: #fff8e1;
+            border: 1.5px solid #ffe082;
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            margin-top: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .verification-notice i {
+            color: #f39c12;
+            font-size: 1.1rem;
+        }
+
+        .verification-notice p {
+            font-size: 0.8rem;
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
+        <div class="auth-card">
+            <!-- BRAND -->
+            <div class="brand-section">
+                <div class="brand-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="brand-name">
+                    Seedwel 
+                    <span>marketplace</span>
+                </div>
+            </div>
+
+            <!-- HEADER -->
+            <div class="auth-header">
+                <h1 class="auth-title">Create Account</h1>
+                <p class="auth-subtitle">Join the global marketplace today</p>
+            </div>
+
+            <!-- ERROR MESSAGE -->
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Registration failed</span>
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <span id="successText">Account created! Redirecting...</span>
+            </div>
+
+            <!-- REGISTRATION FORM -->
+            <form class="auth-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i> First Name
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" class="form-input" id="firstName" placeholder="John" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i> Last Name
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" class="form-input" id="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-tag"></i> Display Name
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-at input-icon"></i>
+                        <input type="text" class="form-input" id="displayName" placeholder="How you'll appear to others">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-envelope"></i> Email Address
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-input" id="email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-input" id="password" placeholder="••••••••" required>
+                        <i class="fas fa-eye password-toggle" id="togglePassword" onclick="togglePasswordVisibility()"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <span class="strength-text" id="strengthText">Enter a strong password</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-check-circle"></i> Confirm Password
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-input" id="confirmPassword" placeholder="••••••••" required>
+                        <i class="fas fa-eye password-toggle" id="toggleConfirmPassword" onclick="toggleConfirmPasswordVisibility()"></i>
+                    </div>
+                </div>
+
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="termsCheckbox" required>
+                    <label for="termsCheckbox">
+                        I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and 
+                        <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+
+            <!-- DIVIDER -->
+            <div class="divider">or sign up with</div>
+
+            <!-- GOOGLE SIGN-UP -->
+            <button class="btn-google" onclick="signUpWithGoogle()">
+                <i class="fab fa-google"></i> Sign up with Google
+            </button>
+
+            <!-- VERIFICATION NOTICE -->
+            <div class="verification-notice">
+                <i class="fas fa-envelope-open-text"></i>
+                <p>We'll send a verification email to confirm your account.</p>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Message</span>
+    </div>
+
+    <script type="module">
+        // Firebase Configuration
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword,
+            signInWithPopup,
+            GoogleAuthProvider,
+            updateProfile,
+            sendEmailVerification,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA-BpRy-RVc2rqIG6uiRu_XrGEu1ZGnQwU",
+            authDomain: "seedwel-investment-limited.firebaseapp.com",
+            databaseURL: "https://seedwel-investment-limited-default-rtdb.firebaseio.com",
+            projectId: "seedwel-investment-limited",
+            storageBucket: "seedwel-investment-limited.firebasestorage.app",
+            messagingSenderId: "197778268619",
+            appId: "1:197778268619:web:92f29d88fa5a22dbfa964e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        // Check if already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.emailVerified) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]+/)) strength++;
+            if (password.match(/[A-Z]+/)) strength++;
+            if (password.match(/[0-9]+/)) strength++;
+            if (password.match(/[!@#$%^&*(),.?":{}|<>]+/)) strength++;
+            
+            return strength;
+        }
+
+        function updatePasswordStrength(password) {
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            const strength = checkPasswordStrength(password);
+            
+            strengthFill.className = 'strength-fill';
+            
+            if (password.length === 0) {
+                strengthFill.style.width = '0%';
+                strengthText.textContent = 'Enter a strong password';
+            } else if (strength <= 2) {
+                strengthFill.classList.add('weak');
+                strengthText.textContent = 'Weak password';
+            } else if (strength <= 3) {
+                strengthFill.classList.add('medium');
+                strengthText.textContent = 'Medium password';
+            } else {
+                strengthFill.classList.add('strong');
+                strengthText.textContent = 'Strong password!';
+            }
+        }
+
+        document.getElementById('password').addEventListener('input', (e) => {
+            updatePasswordStrength(e.target.value);
+        });
+
+        // Toggle password visibility
+        window.togglePasswordVisibility = function() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        };
+
+        window.toggleConfirmPasswordVisibility = function() {
+            const passwordInput = document.getElementById('confirmPassword');
+            const toggleIcon = document.getElementById('toggleConfirmPassword');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        };
+
+        // Hide error message
+        function hideError() {
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorEl.classList.add('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const successEl = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            successText.textContent = message;
+            successEl.classList.add('show');
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        // Get friendly error message
+        function getErrorMessage(errorCode) {
+            const messages = {
+                'auth/email-already-in-use': 'This email is already registered. Please sign in instead.',
+                'auth/invalid-email': 'Please enter a valid email address.',
+                'auth/weak-password': 'Password should be at least 6 characters.',
+                'auth/network-request-failed': 'Network error. Please check your connection.',
+                'auth/popup-closed-by-user': 'Sign-up popup was closed.',
+                'auth/popup-blocked': 'Pop-up was blocked. Please allow pop-ups.',
+                'auth/too-many-requests': 'Too many attempts. Please try again later.'
+            };
+            return messages[errorCode] || 'An error occurred. Please try again.';
+        }
+
+        // Create user profile in Firestore
+        async function createUserProfile(user, additionalData = {}) {
+            const userData = {
+                uid: user.uid,
+                email: user.email,
+                displayName: additionalData.displayName || user.displayName || user.email?.split('@')[0],
+                firstName: additionalData.firstName || '',
+                lastName: additionalData.lastName || '',
+                photoURL: user.photoURL || '',
+                emailVerified: user.emailVerified,
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp(),
+                listings: [],
+                favorites: [],
+                rating: 0,
+                reviews: 0,
+                verified: false
+            };
+            
+            await setDoc(doc(db, 'users', user.uid), userData);
+            return userData;
+        }
+
+        // Handle registration form submission
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const displayNameInput = document.getElementById('displayName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const termsAccepted = document.getElementById('termsCheckbox').checked;
+            const registerBtn = document.getElementById('registerBtn');
+            
+            // Validation
+            if (!firstName || !lastName) {
+                showError('Please enter your first and last name.');
+                return;
+            }
+            
+            if (!email) {
+                showError('Please enter your email address.');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError('Passwords do not match.');
+                return;
+            }
+            
+            if (!termsAccepted) {
+                showError('You must accept the Terms of Service and Privacy Policy.');
+                return;
+            }
+            
+            // Disable button and show loading
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+            
+            try {
+                // Create user
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Update profile
+                const displayName = displayNameInput || `${firstName} ${lastName.charAt(0)}.`;
+                await updateProfile(user, { displayName });
+                
+                // Create user profile in Firestore
+                await createUserProfile(user, {
+                    displayName,
+                    firstName,
+                    lastName
+                });
+                
+                // Send verification email
+                await sendEmailVerification(user);
+                
+                showSuccess('Account created! Please verify your email.');
+                showToast('Verification email sent! Check your inbox.', 'success');
+                
+                // Store user data
+                localStorage.setItem('seedwel_user', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: displayName
+                }));
+                
+                // Redirect after delay
+                setTimeout(() => {
+                    window.location.href = 'login.html?verified=pending';
+                }, 2500);
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                showError(getErrorMessage(error.code));
+                registerBtn.disabled = false;
+                registerBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+            }
+        });
+
+        // Google Sign-Up
+        window.signUpWithGoogle = async function() {
+            hideError();
+            
+            const termsAccepted = document.getElementById('termsCheckbox').checked;
+            if (!termsAccepted) {
+                showError('You must accept the Terms of Service and Privacy Policy.');
+                return;
+            }
+            
+            const registerBtn = document.getElementById('registerBtn');
+            registerBtn.disabled = true;
+            
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                
+                // Create/update user profile in Firestore
+                await createUserProfile(user, {
+                    displayName: user.displayName,
+                    firstName: user.displayName?.split(' ')[0] || '',
+                    lastName: user.displayName?.split(' ').slice(1).join(' ') || ''
+                });
+                
+                showSuccess('Account created! Redirecting...');
+                showToast('Welcome to Seedwel!', 'success');
+                
+                localStorage.setItem('seedwel_user', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                }));
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Google sign-up error:', error);
+                
+                if (error.code !== 'auth/popup-closed-by-user') {
+                    showError(getErrorMessage(error.code));
+                }
+                
+                registerBtn.disabled = false;
+            }
+        };
+
+        // Terms and Privacy
+        window.showTerms = function() {
+            showToast('Terms of Service', 'success');
+        };
+
+        window.showPrivacy = function() {
+            showToast('Privacy Policy', 'success');
+        };
+
+        // Toast function
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const icon = toast.querySelector('i');
+            
+            toast.className = `toast ${type}`;
+            toastMessage.textContent = message;
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Auto-generate display name
+        document.getElementById('firstName').addEventListener('input', updateDisplayName);
+        document.getElementById('lastName').addEventListener('input', updateDisplayName);
+        
+        function updateDisplayName() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const displayNameInput = document.getElementById('displayName');
+            
+            if (!displayNameInput.value || displayNameInput.value === `${firstName} ${lastName.charAt(0)}.`) {
+                if (firstName && lastName) {
+                    displayNameInput.value = `${firstName} ${lastName.charAt(0)}.`;
+                } else if (firstName) {
+                    displayNameInput.value = firstName;
+                }
+            }
+        }
+
+        // Clear error on input
+        ['firstName', 'lastName', 'email', 'password', 'confirmPassword'].forEach(id => {
+            document.getElementById(id).addEventListener('input', hideError);
+        });
+
+        console.log('🚀 Seedwel Register Page - Ready!');
+    </script>
+</body>
+</html>
